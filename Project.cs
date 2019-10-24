@@ -39,7 +39,7 @@ namespace PeachFox
                     if (i != -1)
                     {
                         _tileData.shortpath = _tileData.fullpath.Substring(i + _projectPath.Length + 1);
-                        _tileData.shortpath.Replace("\\", "/");
+                        _tileData.shortpath = _tileData.shortpath.Replace("\\", "/");
                     }
                 }
                 UpdateTileButton();
@@ -199,6 +199,8 @@ namespace PeachFox
         
         private void TileButtonClick(object sender, EventArgs e)
         {
+            if (_tileData == null) 
+                return;
             Button button = (Button)sender;
 
             Tuple<int, int> tilePos = GetTileFromButton(button);
