@@ -26,6 +26,7 @@ namespace PeachFox
 
         Image bmp;
         private int XQuad, YQuad, WQuad, HQuad;
+        private int AnimNum, AnimX, AnimY;
 
         private int cellSize = 16;
         private int numOfCellsX = 200;
@@ -43,7 +44,15 @@ namespace PeachFox
             pictureBox.MouseUp += new MouseEventHandler(PictureBox_MouseUp);
 
             pictureBox.BorderStyle = BorderStyle.FixedSingle;
-            
+
+            if (checkBox1.Parent == groupBox4)
+            {
+                groupBox4.Parent.Controls.Add(checkBox1);
+                checkBox1.Location = new Point(
+                    checkBox1.Left + groupBox4.Left,
+                    checkBox1.Top + groupBox4.Top);
+                checkBox1.BringToFront();
+            }
         }
 
         private void OpenFolderButton_Click(object sender, EventArgs e)
@@ -194,6 +203,10 @@ namespace PeachFox
 
             p = new Pen(Color.FromArgb(175, Color.Red));
             g.DrawRectangle(p, XQuad, YQuad, WQuad, HQuad);
+
+            for(int i = 1; checkBox1.Checked && i < AnimNum; i++)
+                g.DrawRectangle(p, XQuad + (AnimX * i * WQuad), YQuad + (AnimY * i * HQuad), WQuad, HQuad);
+
             p.Dispose();
         }
 
@@ -218,6 +231,19 @@ namespace PeachFox
             WQuad = (int)quadW.Value;
             HQuad = (int)quadH.Value;
             ReDraw();
+        }
+
+        private void Animation_Update(object sender, EventArgs e)
+        {
+            AnimNum = (int)numericUpDown3.Value;
+            AnimX = (int)numericUpDown2.Value;
+            AnimY = (int)numericUpDown1.Value;
+            ReDraw();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox4.Enabled = checkBox1.Checked;
         }
 
         private void buttonMove_Click(object sender, EventArgs e)
@@ -270,6 +296,13 @@ namespace PeachFox
             tile.quad.Y = YQuad;
             tile.quad.W = WQuad;
             tile.quad.H = HQuad;
+            if (checkBox1.Checked)
+            {
+                tile.anim = new TileData.Anim();
+                tile.anim.X = AnimX;
+                tile.anim.Y = AnimY;
+                tile.anim.Num = AnimNum;
+            }
 
             Program.GetProjectForm().TileData = tile;
             Program.ToggleShowTileEditor();

@@ -23,6 +23,11 @@ namespace PeachFox
             set => _root["Quad"] = (LsonDict)value;
         }
 
+        public Animation Animation
+        {
+            set => _root["Animation"] = (LsonDict)value;
+        }
+
         private LsonDict _root;
         public static explicit operator LsonDict(TileGraphic value)
         {
@@ -37,18 +42,23 @@ namespace PeachFox
             _root = new LsonDict();
             File = "";
             Quad = _root.AddIfNotExist("Quad", x => new Quad(x));
+            if (_root.ContainsKey("Animation") == false)
+                _root.Add("Animation", null);
         }
-        public TileGraphic(string file, Quad quad)
+        public TileGraphic(string file, Quad quad, Animation animation)
         {
             _root = new LsonDict();
             File = file;
             Quad = quad;
+            Animation = animation;
         }
         public TileGraphic(LsonDict root)
         {
             _root = root;
             _root.AddIfNotExist("File", new LsonString(""));
             Quad = _root.AddIfNotExist("Quad", x => new Quad(x));
+            if (_root.ContainsKey("Animation") == false)
+                _root.Add("Animation", null);
         }
     }
 
@@ -123,6 +133,55 @@ namespace PeachFox
             _root.AddIfNotExist("Scale", new LsonNumber(1));
         }
 
+    }
+    public class Animation
+    {
+        public int X
+        {
+            get => _root["X"].GetInt();
+            set => _root["X"] = value;
+        }
+        public int Y
+        {
+            get => _root["Y"].GetInt();
+            set => _root["Y"] = value;
+        }
+        public int Num
+        {
+            get => _root["Num"].GetInt();
+            set => _root["Num"] = value;
+        }
+
+        private LsonDict _root;
+        public static explicit operator LsonDict(Animation value)
+        {
+            return value._root;
+        }
+        public static explicit operator Animation(LsonDict value)
+        {
+            return new Animation(value);
+        }
+        public Animation()
+        {
+            _root = new LsonDict();
+            X = 0;
+            Y = 0;
+            Num = 0;
+        }
+        public Animation(int x, int y, int num)
+        {
+            _root = new LsonDict();
+            X = x;
+            Y = y;
+            Num = num;
+        }
+        public Animation(LsonDict root)
+        {
+            _root = root;
+            _root.AddIfNotExist("X", new LsonNumber(0));
+            _root.AddIfNotExist("Y", new LsonNumber(0));
+            _root.AddIfNotExist("Num", new LsonNumber(0));
+        }
     }
     public class Quad
     {

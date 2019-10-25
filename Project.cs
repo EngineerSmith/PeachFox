@@ -230,29 +230,23 @@ namespace PeachFox
             else
                 button.FlatAppearance.BorderColor = Color.LightGray;
 
+            TileGraphic tileGraphic = new TileGraphic();
+            tileGraphic.File = _tileData.shortpath;
+            tileGraphic.Quad.X = _tileData.quad.X;
+            tileGraphic.Quad.Y = _tileData.quad.Y;
+            tileGraphic.Quad.Width = _tileData.quad.W;
+            tileGraphic.Quad.Height = _tileData.quad.H;
+            if (_tileData.anim != null)
+                tileGraphic.Animation = new Animation(_tileData.anim.X, _tileData.anim.Y, _tileData.anim.Num);
+
             if (checkBoxGround.Checked)
             {
                 data.Foreground.Set((int)layerNum.Value, _tileData.image);
-                TileGraphic tileGraphic = new TileGraphic();
-                tileGraphic.File = _tileData.shortpath;
-                tileGraphic.Quad.X = _tileData.quad.X;
-                tileGraphic.Quad.Y = _tileData.quad.Y;
-                tileGraphic.Quad.Width = _tileData.quad.W;
-                tileGraphic.Quad.Height = _tileData.quad.H;
-
                 _tiles[tilePos.Item1][tilePos.Item2].Foreground.Set((int)layerNum.Value, tileGraphic);
             }
             else
             {
                 data.Background.Set((int)layerNum.Value, _tileData.image);
-
-                TileGraphic tileGraphic = new TileGraphic();
-                tileGraphic.File = _tileData.shortpath;
-                tileGraphic.Quad.X = _tileData.quad.X;
-                tileGraphic.Quad.Y = _tileData.quad.Y;
-                tileGraphic.Quad.Width = _tileData.quad.W;
-                tileGraphic.Quad.Height = _tileData.quad.H;
-
                 _tiles[tilePos.Item1][tilePos.Item2].Background.Set((int)layerNum.Value, tileGraphic);
             }
 
