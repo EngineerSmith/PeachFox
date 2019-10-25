@@ -10,6 +10,48 @@ using System.IO;
 
 namespace PeachFox
 {
+    public class TileGraphic
+    {
+        public string File
+        {
+            get => _root["File"].GetString();
+            set => _root["File"] = value;
+        }
+        public Quad Quad
+        {
+            get => (Quad)_root["Quad"];
+            set => _root["Quad"] = (LsonDict)value;
+        }
+
+        private LsonDict _root;
+        public static explicit operator LsonDict(TileGraphic value)
+        {
+            return value._root;
+        }
+        public static explicit operator TileGraphic(LsonDict value)
+        {
+            return new TileGraphic(value);
+        }
+        public TileGraphic()
+        {
+            _root = new LsonDict();
+            File = "";
+            Quad = _root.AddIfNotExist("Quad", x => new Quad(x));
+        }
+        public TileGraphic(string file, Quad quad)
+        {
+            _root = new LsonDict();
+            File = file;
+            Quad = quad;
+        }
+        public TileGraphic(LsonDict root)
+        {
+            _root = root;
+            _root.AddIfNotExist("File", new LsonString(""));
+            Quad = _root.AddIfNotExist("Quad", x => new Quad(x));
+        }
+    }
+
     public static class LsonAddOn
     {
         public static void AddIfNotExist(this LsonDict dict, string key, LsonValue value)
@@ -23,8 +65,16 @@ namespace PeachFox
                 dict.Add(key, new LsonDict());
             return con(dict[key].GetDict());
         }
+
+        public static void Set(this LsonDict dict, int key, TileGraphic value)
+        {
+            if (dict.ContainsKey(key))
+                dict[key] = (LsonDict)value;
+            else
+                dict.Add(key, (LsonDict)value);
+        }
     }
-    class GraphicsData
+    public class GraphicsData
     {
         public int Width
         {
@@ -74,7 +124,7 @@ namespace PeachFox
         }
 
     }
-    class Quad
+    public class Quad
     {
         public int X
         {
@@ -133,50 +183,7 @@ namespace PeachFox
             _root.AddIfNotExist("H", new LsonNumber(0));
         }
     }
-    class TileGraphic
-    {
-        public string File
-        {
-            get => _root["File"].GetString();
-            set => _root["File"] = value;
-        }
-        public Quad Quad
-        {
-            get => (Quad)_root["Quad"];
-            set => _root["Quad"] = (LsonDict)value;
-        }
-
-        private LsonDict _root;
-        public static explicit operator LsonDict(TileGraphic value)
-        {
-            return value._root;
-        }
-        public static explicit operator TileGraphic(LsonDict value)
-        {
-            return new TileGraphic(value);
-        }
-        public TileGraphic()
-        {
-            _root = new LsonDict();
-            File = "";
-            Quad = _root.AddIfNotExist("Quad", x => new Quad(x));
-        }
-
-        public TileGraphic(string file, Quad quad)
-        {
-            _root = new LsonDict();
-            File = file;
-            Quad = quad;
-        }
-
-        public TileGraphic(LsonDict root)
-        {
-            _root = root;
-            _root.AddIfNotExist("File", new LsonString(""));
-            Quad = _root.AddIfNotExist("Quad", x => new Quad(x));
-        }
-    }
-    class Physics
+    public class Physics
     {
         public bool Colliable
         {
@@ -211,22 +218,22 @@ namespace PeachFox
             _root.AddIfNotExist("Colliable", new LsonBool(false));
         }
     }
-    class Tile
+    public class Tile
     {
-        public TileGraphic Background
+        public LsonDict Background
         {
-            get => (TileGraphic)_root["Bg"];
+            get => _root["Bg"].GetDict();
             set
             {
-                _root["Bg"] = (LsonDict)value;
+                _root["Bg"] = value;
             }
         }
-        public TileGraphic Foreground
+        public LsonDict Foreground
         {
-            get => (TileGraphic)_root["Fg"];
+            get => _root["Fg"].GetDict();
             set
             {
-                _root["Fg"] = (LsonDict)value;
+                _root["Fg"] = value;
             }
         }
         public Physics Physics
@@ -248,11 +255,11 @@ namespace PeachFox
         public Tile()
         {
             _root = new LsonDict();
-            Background = _root.AddIfNotExist("Bg", x => new TileGraphic(x));
-            Foreground = _root.AddIfNotExist("Fg", x => new TileGraphic(x));
+            Background = _root.AddIfNotExist("Bg", x => new LsonDict(x));
+            Foreground = _root.AddIfNotExist("Fg", x => new LsonDict(x));
             Physics = _root.AddIfNotExist("Physics", x => new Physics(x));
         }
-        public Tile(TileGraphic background, TileGraphic foreground, Physics physics)
+        public Tile(LsonDict background, LsonDict foreground, Physics physics)
         {
             _root = new LsonDict();
             Background = background;
@@ -262,12 +269,12 @@ namespace PeachFox
         public Tile(LsonDict root)
         {
             _root = root;
-            Background = _root.AddIfNotExist("Bg", x => new TileGraphic(x));
-            Foreground = _root.AddIfNotExist("Fg", x => new TileGraphic(x));
+            Background = _root.AddIfNotExist("Bg", x => new LsonDict(x));
+            Foreground = _root.AddIfNotExist("Fg", x => new LsonDict(x));
             Physics = _root.AddIfNotExist("Physics", x => new Physics(x));
         }
     }
-    class TileMap
+    public class TileMap
     {
         private readonly string _filepath;
         private Dictionary<string, LsonValue> _tileMapRoot;

@@ -56,6 +56,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Texture = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.layerNum = new System.Windows.Forms.NumericUpDown();
             this.checkBoxGround = new System.Windows.Forms.CheckBox();
             this.checkBoxColliable = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -67,6 +69,8 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.checkBoxDraw = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabController.SuspendLayout();
             this.tabTileMap.SuspendLayout();
             this.tabControllerTileMap.SuspendLayout();
@@ -82,6 +86,7 @@
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layerNum)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.Graphics.SuspendLayout();
             this.SuspendLayout();
@@ -94,7 +99,7 @@
             this.tabController.Location = new System.Drawing.Point(0, 0);
             this.tabController.Name = "tabController";
             this.tabController.SelectedIndex = 0;
-            this.tabController.Size = new System.Drawing.Size(805, 433);
+            this.tabController.Size = new System.Drawing.Size(805, 451);
             this.tabController.TabIndex = 1;
             // 
             // tabSettings
@@ -113,7 +118,7 @@
             this.tabTileMap.Location = new System.Drawing.Point(4, 22);
             this.tabTileMap.Name = "tabTileMap";
             this.tabTileMap.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTileMap.Size = new System.Drawing.Size(797, 407);
+            this.tabTileMap.Size = new System.Drawing.Size(797, 425);
             this.tabTileMap.TabIndex = 1;
             this.tabTileMap.Text = "TileMap Creator";
             this.tabTileMap.UseVisualStyleBackColor = true;
@@ -126,7 +131,7 @@
             this.tabControllerTileMap.Location = new System.Drawing.Point(3, 3);
             this.tabControllerTileMap.Name = "tabControllerTileMap";
             this.tabControllerTileMap.SelectedIndex = 0;
-            this.tabControllerTileMap.Size = new System.Drawing.Size(791, 401);
+            this.tabControllerTileMap.Size = new System.Drawing.Size(791, 419);
             this.tabControllerTileMap.TabIndex = 0;
             // 
             // tabPage1
@@ -314,7 +319,7 @@
             this.tabEditor.Location = new System.Drawing.Point(4, 22);
             this.tabEditor.Name = "tabEditor";
             this.tabEditor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditor.Size = new System.Drawing.Size(783, 375);
+            this.tabEditor.Size = new System.Drawing.Size(783, 393);
             this.tabEditor.TabIndex = 1;
             this.tabEditor.Text = "Editor";
             this.tabEditor.UseVisualStyleBackColor = true;
@@ -324,7 +329,7 @@
             this.panelEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelEditor.Location = new System.Drawing.Point(3, 3);
             this.panelEditor.Name = "panelEditor";
-            this.panelEditor.Size = new System.Drawing.Size(658, 369);
+            this.panelEditor.Size = new System.Drawing.Size(658, 387);
             this.panelEditor.TabIndex = 3;
             // 
             // flowLayoutPanel1
@@ -339,7 +344,7 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(661, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(119, 369);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(119, 387);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // tableLayoutPanel1
@@ -369,14 +374,32 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.layerNum);
             this.groupBox4.Controls.Add(this.checkBoxGround);
             this.groupBox4.Controls.Add(this.checkBoxColliable);
             this.groupBox4.Location = new System.Drawing.Point(3, 129);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(110, 48);
+            this.groupBox4.Size = new System.Drawing.Size(110, 101);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Tile Settings";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(46, 47);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(33, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Layer";
+            // 
+            // layerNum
+            // 
+            this.layerNum.Location = new System.Drawing.Point(4, 45);
+            this.layerNum.Name = "layerNum";
+            this.layerNum.Size = new System.Drawing.Size(36, 20);
+            this.layerNum.TabIndex = 0;
             // 
             // checkBoxGround
             // 
@@ -401,12 +424,13 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Controls.Add(this.buttonRight);
             this.groupBox3.Controls.Add(this.buttonLeft);
             this.groupBox3.Controls.Add(this.buttonDown);
             this.groupBox3.Controls.Add(this.buttonUp);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(3, 183);
+            this.groupBox3.Location = new System.Drawing.Point(3, 236);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(113, 83);
             this.groupBox3.TabIndex = 2;
@@ -416,9 +440,9 @@
             // buttonRight
             // 
             this.buttonRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonRight.Location = new System.Drawing.Point(64, 37);
+            this.buttonRight.Location = new System.Drawing.Point(70, 37);
             this.buttonRight.Name = "buttonRight";
-            this.buttonRight.Size = new System.Drawing.Size(46, 21);
+            this.buttonRight.Size = new System.Drawing.Size(40, 21);
             this.buttonRight.TabIndex = 3;
             this.buttonRight.Text = "Right";
             this.buttonRight.UseVisualStyleBackColor = true;
@@ -429,7 +453,7 @@
             this.buttonLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.buttonLeft.Location = new System.Drawing.Point(3, 37);
             this.buttonLeft.Name = "buttonLeft";
-            this.buttonLeft.Size = new System.Drawing.Size(47, 21);
+            this.buttonLeft.Size = new System.Drawing.Size(41, 21);
             this.buttonLeft.TabIndex = 2;
             this.buttonLeft.Text = "Left";
             this.buttonLeft.UseVisualStyleBackColor = true;
@@ -459,10 +483,11 @@
             // 
             // Graphics
             // 
+            this.Graphics.Controls.Add(this.checkBoxDraw);
             this.Graphics.Controls.Add(this.checkBox1);
-            this.Graphics.Location = new System.Drawing.Point(3, 272);
+            this.Graphics.Location = new System.Drawing.Point(3, 325);
             this.Graphics.Name = "Graphics";
-            this.Graphics.Size = new System.Drawing.Size(113, 38);
+            this.Graphics.Size = new System.Drawing.Size(113, 58);
             this.Graphics.TabIndex = 0;
             this.Graphics.TabStop = false;
             this.Graphics.Text = "Graphics";
@@ -483,11 +508,38 @@
             this.openFileDialog1.FileName = "TileMap.lua";
             this.openFileDialog1.Title = "Open TileMap";
             // 
+            // checkBoxDraw
+            // 
+            this.checkBoxDraw.AutoSize = true;
+            this.checkBoxDraw.Checked = true;
+            this.checkBoxDraw.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+            this.checkBoxDraw.Cursor = System.Windows.Forms.Cursors.Default;
+            this.checkBoxDraw.Location = new System.Drawing.Point(3, 33);
+            this.checkBoxDraw.Name = "checkBoxDraw";
+            this.checkBoxDraw.Size = new System.Drawing.Size(67, 17);
+            this.checkBoxDraw.TabIndex = 0;
+            this.checkBoxDraw.Text = "Show All";
+            this.checkBoxDraw.ThreeState = true;
+            this.checkBoxDraw.UseVisualStyleBackColor = true;
+            this.checkBoxDraw.CheckedChanged += new System.EventHandler(this.checkBoxDraw_CheckedChanged);
+            this.checkBoxDraw.CheckStateChanged += new System.EventHandler(this.checkBoxDraw_CheckedChanged);
+            // 
+            // button2
+            // 
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.Location = new System.Drawing.Point(44, 37);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(26, 21);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "R";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(805, 433);
+            this.ClientSize = new System.Drawing.Size(805, 451);
             this.Controls.Add(this.tabController);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -521,6 +573,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layerNum)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.Graphics.ResumeLayout(false);
             this.Graphics.PerformLayout();
@@ -568,5 +621,9 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox checkBoxGround;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown layerNum;
+        private System.Windows.Forms.CheckBox checkBoxDraw;
+        private System.Windows.Forms.Button button2;
     }
 }
