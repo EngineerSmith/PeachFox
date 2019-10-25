@@ -119,10 +119,14 @@ namespace PeachFox
                 cellSize = 16;
             else if (radioButton20.Checked)
                 cellSize = 20;
-            else if(radioButton32.Checked)
+            else if (radioButton32.Checked)
                 cellSize = 32;
+            else
+                cellSize = (int)numericUpDown4.Value;
 
-            if(bmp != null)
+            numericUpDown4.Value = cellSize;
+
+            if (bmp != null)
             {
                 if (cellSize != 0)
                 {
@@ -231,6 +235,17 @@ namespace PeachFox
             WQuad = (int)quadW.Value;
             HQuad = (int)quadH.Value;
             ReDraw();
+        }
+
+        private void numericUpDown4_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown4.Value == cellSize)
+                return;
+            radioButton0.Checked = false;
+            radioButton16.Checked = false;
+            radioButton20.Checked = false;
+            radioButton32.Checked = false;
+            SetCellSize(sender, e);
         }
 
         private void Animation_Update(object sender, EventArgs e)

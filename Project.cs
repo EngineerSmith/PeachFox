@@ -196,6 +196,25 @@ namespace PeachFox
         {
             Button button = (Button)sender;
             GetData(button).IsHovered = true;
+            labelDetails.Text = "";
+
+            Tuple<int, int> tilePos = GetTileFromButton(button);
+            if (_tiles.ContainsKey(tilePos.Item1) == false)
+                return;
+            if (_tiles[tilePos.Item1].ContainsKey(tilePos.Item2) == false)
+                return;
+            labelDetails.Text += "Bg:\n";
+            foreach (var kvp in _tiles[tilePos.Item1][tilePos.Item2].Background)
+            {
+                string path = ((TileGraphic)kvp.Value).File;
+                labelDetails.Text += $"{(int)kvp.Key}: {path.Substring(path.LastIndexOf('/') + 1)}\n";
+            }
+            labelDetails.Text += "Fg:\n";
+            foreach (var kvp in _tiles[tilePos.Item1][tilePos.Item2].Foreground)
+            {
+                string path = ((TileGraphic)kvp.Value).File;
+                labelDetails.Text += $"{(int)kvp.Key}: {path.Substring(path.LastIndexOf('/') + 1)}\n";
+            }
         }
 
         private void ButtonOnLeave(object sender, EventArgs e)

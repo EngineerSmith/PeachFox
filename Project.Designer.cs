@@ -61,16 +61,18 @@
             this.checkBoxGround = new System.Windows.Forms.CheckBox();
             this.checkBoxColliable = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonUp = new System.Windows.Forms.Button();
             this.Graphics = new System.Windows.Forms.GroupBox();
+            this.checkBoxDraw = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.checkBoxDraw = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.labelDetails = new System.Windows.Forms.Label();
             this.tabController.SuspendLayout();
             this.tabTileMap.SuspendLayout();
             this.tabControllerTileMap.SuspendLayout();
@@ -89,6 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layerNum)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.Graphics.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabController
@@ -99,7 +102,7 @@
             this.tabController.Location = new System.Drawing.Point(0, 0);
             this.tabController.Name = "tabController";
             this.tabController.SelectedIndex = 0;
-            this.tabController.Size = new System.Drawing.Size(805, 451);
+            this.tabController.Size = new System.Drawing.Size(772, 560);
             this.tabController.TabIndex = 1;
             // 
             // tabSettings
@@ -107,7 +110,7 @@
             this.tabSettings.Location = new System.Drawing.Point(4, 22);
             this.tabSettings.Name = "tabSettings";
             this.tabSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSettings.Size = new System.Drawing.Size(797, 407);
+            this.tabSettings.Size = new System.Drawing.Size(797, 425);
             this.tabSettings.TabIndex = 0;
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
@@ -118,7 +121,7 @@
             this.tabTileMap.Location = new System.Drawing.Point(4, 22);
             this.tabTileMap.Name = "tabTileMap";
             this.tabTileMap.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTileMap.Size = new System.Drawing.Size(797, 425);
+            this.tabTileMap.Size = new System.Drawing.Size(764, 534);
             this.tabTileMap.TabIndex = 1;
             this.tabTileMap.Text = "TileMap Creator";
             this.tabTileMap.UseVisualStyleBackColor = true;
@@ -131,7 +134,7 @@
             this.tabControllerTileMap.Location = new System.Drawing.Point(3, 3);
             this.tabControllerTileMap.Name = "tabControllerTileMap";
             this.tabControllerTileMap.SelectedIndex = 0;
-            this.tabControllerTileMap.Size = new System.Drawing.Size(791, 419);
+            this.tabControllerTileMap.Size = new System.Drawing.Size(758, 528);
             this.tabControllerTileMap.TabIndex = 0;
             // 
             // tabPage1
@@ -142,7 +145,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(783, 375);
+            this.tabPage1.Size = new System.Drawing.Size(783, 393);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -319,7 +322,7 @@
             this.tabEditor.Location = new System.Drawing.Point(4, 22);
             this.tabEditor.Name = "tabEditor";
             this.tabEditor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditor.Size = new System.Drawing.Size(783, 393);
+            this.tabEditor.Size = new System.Drawing.Size(750, 502);
             this.tabEditor.TabIndex = 1;
             this.tabEditor.Text = "Editor";
             this.tabEditor.UseVisualStyleBackColor = true;
@@ -329,7 +332,7 @@
             this.panelEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelEditor.Location = new System.Drawing.Point(3, 3);
             this.panelEditor.Name = "panelEditor";
-            this.panelEditor.Size = new System.Drawing.Size(658, 387);
+            this.panelEditor.Size = new System.Drawing.Size(625, 496);
             this.panelEditor.TabIndex = 3;
             // 
             // flowLayoutPanel1
@@ -340,11 +343,12 @@
             this.flowLayoutPanel1.Controls.Add(this.groupBox4);
             this.flowLayoutPanel1.Controls.Add(this.groupBox3);
             this.flowLayoutPanel1.Controls.Add(this.Graphics);
+            this.flowLayoutPanel1.Controls.Add(this.groupBox5);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(661, 3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(628, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(119, 387);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(119, 496);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // tableLayoutPanel1
@@ -380,7 +384,7 @@
             this.groupBox4.Controls.Add(this.checkBoxColliable);
             this.groupBox4.Location = new System.Drawing.Point(3, 129);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(110, 101);
+            this.groupBox4.Size = new System.Drawing.Size(110, 70);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Tile Settings";
@@ -430,12 +434,23 @@
             this.groupBox3.Controls.Add(this.buttonDown);
             this.groupBox3.Controls.Add(this.buttonUp);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(3, 236);
+            this.groupBox3.Location = new System.Drawing.Point(3, 205);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(113, 83);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Movement";
+            // 
+            // button2
+            // 
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.Location = new System.Drawing.Point(44, 37);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(26, 21);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "R";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // buttonRight
             // 
@@ -485,28 +500,12 @@
             // 
             this.Graphics.Controls.Add(this.checkBoxDraw);
             this.Graphics.Controls.Add(this.checkBox1);
-            this.Graphics.Location = new System.Drawing.Point(3, 325);
+            this.Graphics.Location = new System.Drawing.Point(3, 294);
             this.Graphics.Name = "Graphics";
             this.Graphics.Size = new System.Drawing.Size(113, 58);
             this.Graphics.TabIndex = 0;
             this.Graphics.TabStop = false;
             this.Graphics.Text = "Graphics";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(3, 16);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(95, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Show Colliable";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "TileMap.lua";
-            this.openFileDialog1.Title = "Open TileMap";
             // 
             // checkBoxDraw
             // 
@@ -524,22 +523,45 @@
             this.checkBoxDraw.CheckedChanged += new System.EventHandler(this.checkBoxDraw_CheckedChanged);
             this.checkBoxDraw.CheckStateChanged += new System.EventHandler(this.checkBoxDraw_CheckedChanged);
             // 
-            // button2
+            // checkBox1
             // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(44, 37);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(26, 21);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "R";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(3, 16);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(95, 17);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Show Colliable";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "TileMap.lua";
+            this.openFileDialog1.Title = "Open TileMap";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.labelDetails);
+            this.groupBox5.Location = new System.Drawing.Point(3, 358);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(113, 129);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Details";
+            // 
+            // labelDetails
+            // 
+            this.labelDetails.AutoSize = true;
+            this.labelDetails.Location = new System.Drawing.Point(7, 20);
+            this.labelDetails.Name = "labelDetails";
+            this.labelDetails.Size = new System.Drawing.Size(0, 13);
+            this.labelDetails.TabIndex = 0;
             // 
             // Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(805, 451);
+            this.ClientSize = new System.Drawing.Size(772, 560);
             this.Controls.Add(this.tabController);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -577,6 +599,8 @@
             this.groupBox3.ResumeLayout(false);
             this.Graphics.ResumeLayout(false);
             this.Graphics.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -625,5 +649,7 @@
         private System.Windows.Forms.NumericUpDown layerNum;
         private System.Windows.Forms.CheckBox checkBoxDraw;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label labelDetails;
     }
 }
