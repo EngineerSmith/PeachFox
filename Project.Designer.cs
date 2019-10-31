@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabController = new System.Windows.Forms.TabControl();
+            this.ProjectTabs = new System.Windows.Forms.TabControl();
             this.tabSettings = new System.Windows.Forms.TabPage();
             this.tabTileMap = new System.Windows.Forms.TabPage();
             this.tabControllerTileMap = new System.Windows.Forms.TabControl();
@@ -69,11 +69,31 @@
             this.Graphics = new System.Windows.Forms.GroupBox();
             this.checkBoxDraw = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.labelDetails = new System.Windows.Forms.Label();
-            this.tabController.SuspendLayout();
+            this.tabCharacter = new System.Windows.Forms.TabPage();
+            this.tabCharacterControl = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.NameCell = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FileCell = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AnimatedCell = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.WidthCell = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HeightCell = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeCell = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.characterGraphicBox = new System.Windows.Forms.PictureBox();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.buttonColor = new System.Windows.Forms.Button();
+            this.ProjectTabs.SuspendLayout();
             this.tabTileMap.SuspendLayout();
             this.tabControllerTileMap.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -92,25 +112,32 @@
             this.groupBox3.SuspendLayout();
             this.Graphics.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.tabCharacter.SuspendLayout();
+            this.tabCharacterControl.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.characterGraphicBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabController
+            // ProjectTabs
             // 
-            this.tabController.Controls.Add(this.tabSettings);
-            this.tabController.Controls.Add(this.tabTileMap);
-            this.tabController.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabController.Location = new System.Drawing.Point(0, 0);
-            this.tabController.Name = "tabController";
-            this.tabController.SelectedIndex = 0;
-            this.tabController.Size = new System.Drawing.Size(772, 560);
-            this.tabController.TabIndex = 1;
+            this.ProjectTabs.Controls.Add(this.tabSettings);
+            this.ProjectTabs.Controls.Add(this.tabTileMap);
+            this.ProjectTabs.Controls.Add(this.tabCharacter);
+            this.ProjectTabs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ProjectTabs.Location = new System.Drawing.Point(0, 0);
+            this.ProjectTabs.Name = "ProjectTabs";
+            this.ProjectTabs.SelectedIndex = 0;
+            this.ProjectTabs.Size = new System.Drawing.Size(772, 560);
+            this.ProjectTabs.TabIndex = 1;
             // 
             // tabSettings
             // 
             this.tabSettings.Location = new System.Drawing.Point(4, 22);
             this.tabSettings.Name = "tabSettings";
             this.tabSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSettings.Size = new System.Drawing.Size(797, 425);
+            this.tabSettings.Size = new System.Drawing.Size(764, 534);
             this.tabSettings.TabIndex = 0;
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
@@ -145,7 +172,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(783, 393);
+            this.tabPage1.Size = new System.Drawing.Size(750, 502);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -534,11 +561,6 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "TileMap.lua";
-            this.openFileDialog1.Title = "Open TileMap";
-            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.labelDetails);
@@ -557,12 +579,207 @@
             this.labelDetails.Size = new System.Drawing.Size(0, 13);
             this.labelDetails.TabIndex = 0;
             // 
+            // tabCharacter
+            // 
+            this.tabCharacter.Controls.Add(this.tabCharacterControl);
+            this.tabCharacter.Location = new System.Drawing.Point(4, 22);
+            this.tabCharacter.Name = "tabCharacter";
+            this.tabCharacter.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCharacter.Size = new System.Drawing.Size(764, 534);
+            this.tabCharacter.TabIndex = 2;
+            this.tabCharacter.Text = "Character";
+            this.tabCharacter.UseVisualStyleBackColor = true;
+            // 
+            // tabCharacterControl
+            // 
+            this.tabCharacterControl.Controls.Add(this.tabPage2);
+            this.tabCharacterControl.Controls.Add(this.tabPage3);
+            this.tabCharacterControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabCharacterControl.Location = new System.Drawing.Point(3, 3);
+            this.tabCharacterControl.Name = "tabCharacterControl";
+            this.tabCharacterControl.SelectedIndex = 0;
+            this.tabCharacterControl.Size = new System.Drawing.Size(758, 528);
+            this.tabCharacterControl.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(750, 502);
+            this.tabPage2.TabIndex = 0;
+            this.tabPage2.Text = "Character Creator";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.characterGraphicBox);
+            this.tabPage3.Controls.Add(this.dataGridView);
+            this.tabPage3.Controls.Add(this.panel1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(750, 502);
+            this.tabPage3.TabIndex = 1;
+            this.tabPage3.Text = "Character Graphics";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView
+            // 
+            this.dataGridView.AllowUserToResizeRows = false;
+            this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.NameCell,
+            this.FileCell,
+            this.AnimatedCell,
+            this.WidthCell,
+            this.HeightCell,
+            this.TimeCell});
+            this.dataGridView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dataGridView.Location = new System.Drawing.Point(3, 49);
+            this.dataGridView.MultiSelect = false;
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dataGridView.RowHeadersVisible = false;
+            this.dataGridView.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.Empty;
+            this.dataGridView.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Empty;
+            this.dataGridView.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.dataGridView.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.dataGridView.Size = new System.Drawing.Size(609, 450);
+            this.dataGridView.TabIndex = 1;
+            this.dataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.UpdateRow);
+            // 
+            // NameCell
+            // 
+            this.NameCell.HeaderText = "Name";
+            this.NameCell.Name = "NameCell";
+            this.NameCell.ToolTipText = "Name of graphic state";
+            // 
+            // FileCell
+            // 
+            this.FileCell.HeaderText = "File";
+            this.FileCell.Name = "FileCell";
+            this.FileCell.ReadOnly = true;
+            // 
+            // AnimatedCell
+            // 
+            this.AnimatedCell.FalseValue = "false";
+            this.AnimatedCell.HeaderText = "Is Animated";
+            this.AnimatedCell.Name = "AnimatedCell";
+            this.AnimatedCell.ReadOnly = true;
+            this.AnimatedCell.TrueValue = "true";
+            // 
+            // WidthCell
+            // 
+            this.WidthCell.HeaderText = "Width";
+            this.WidthCell.Name = "WidthCell";
+            this.WidthCell.ReadOnly = true;
+            // 
+            // HeightCell
+            // 
+            this.HeightCell.HeaderText = "Height";
+            this.HeightCell.Name = "HeightCell";
+            this.HeightCell.ReadOnly = true;
+            // 
+            // TimeCell
+            // 
+            this.TimeCell.HeaderText = "Time";
+            this.TimeCell.Name = "TimeCell";
+            this.TimeCell.ReadOnly = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.buttonColor);
+            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.button4);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.button5);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(744, 46);
+            this.panel1.TabIndex = 5;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(327, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 20);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "Save As...";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Enabled = false;
+            this.button4.Location = new System.Drawing.Point(224, 3);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(97, 20);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "New Graphic Set";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Maroon;
+            this.label6.Location = new System.Drawing.Point(3, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(73, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "HINT TEXT";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(3, 3);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(184, 20);
+            this.textBox2.TabIndex = 0;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(193, 3);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(25, 20);
+            this.button5.TabIndex = 3;
+            this.button5.Text = "...";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "TileMap.lua";
+            this.openFileDialog1.Title = "Open TileMap";
+            // 
+            // characterGraphicBox
+            // 
+            this.characterGraphicBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.characterGraphicBox.ImageLocation = "";
+            this.characterGraphicBox.Location = new System.Drawing.Point(612, 49);
+            this.characterGraphicBox.Name = "characterGraphicBox";
+            this.characterGraphicBox.Size = new System.Drawing.Size(135, 450);
+            this.characterGraphicBox.TabIndex = 6;
+            this.characterGraphicBox.TabStop = false;
+            // 
+            // buttonColor
+            // 
+            this.buttonColor.Location = new System.Drawing.Point(666, 3);
+            this.buttonColor.Name = "buttonColor";
+            this.buttonColor.Size = new System.Drawing.Size(75, 23);
+            this.buttonColor.TabIndex = 11;
+            this.buttonColor.Text = "Background Color";
+            this.buttonColor.UseVisualStyleBackColor = true;
+            this.buttonColor.Click += new System.EventHandler(this.buttonColor_Click);
+            // 
             // Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(772, 560);
-            this.Controls.Add(this.tabController);
+            this.Controls.Add(this.ProjectTabs);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(700, 410);
@@ -574,7 +791,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Project_FormClosed);
             this.ResizeEnd += new System.EventHandler(this.Project_Resize);
-            this.tabController.ResumeLayout(false);
+            this.ProjectTabs.ResumeLayout(false);
             this.tabTileMap.ResumeLayout(false);
             this.tabControllerTileMap.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -601,12 +818,19 @@
             this.Graphics.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.tabCharacter.ResumeLayout(false);
+            this.tabCharacterControl.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.characterGraphicBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.TabControl tabController;
+        private System.Windows.Forms.TabControl ProjectTabs;
         private System.Windows.Forms.TabPage tabSettings;
         private System.Windows.Forms.TabPage tabTileMap;
         private System.Windows.Forms.TabControl tabControllerTileMap;
@@ -651,5 +875,25 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label labelDetails;
+        private System.Windows.Forms.TabPage tabCharacter;
+        private System.Windows.Forms.TabControl tabCharacterControl;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameCell;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FileCell;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn AnimatedCell;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WidthCell;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HeightCell;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeCell;
+        private System.Windows.Forms.PictureBox characterGraphicBox;
+        private System.Windows.Forms.Button buttonColor;
+        private System.Windows.Forms.ColorDialog colorDialog;
     }
 }

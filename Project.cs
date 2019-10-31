@@ -34,13 +34,16 @@ namespace PeachFox
                 if (_tileData != null)
                     _tileData.Dispose();
                 _tileData = value;
-                if(_tileData.shortpath == null && _tileData.fullpath.Length != 0)
+                if (value != null)
                 {
-                    int i = _tileData.fullpath.IndexOf(_projectPath);
-                    if (i != -1)
+                    if (_tileData.shortpath == null && _tileData.fullpath.Length != 0)
                     {
-                        _tileData.shortpath = _tileData.fullpath.Substring(i + _projectPath.Length + 1);
-                        _tileData.shortpath = _tileData.shortpath.Replace("\\", "/");
+                        int i = _tileData.fullpath.IndexOf(_projectPath);
+                        if (i != -1)
+                        {
+                            _tileData.shortpath = _tileData.fullpath.Substring(i + _projectPath.Length + 1);
+                            _tileData.shortpath = _tileData.shortpath.Replace("\\", "/");
+                        }
                     }
                 }
                 UpdateTileButton();
@@ -66,6 +69,8 @@ namespace PeachFox
         }
         private void SetUpEditor()
         {
+            if (_tileMap == null)
+                return;
             SetUpButtons();
             _tiles = _tileMap.Map;
             PaintTiles();
@@ -189,7 +194,6 @@ namespace PeachFox
                     Squares[w][h].Item1.FlatAppearance.BorderColor = Color.LightGray;
                 }
             }
-
         }
 
         private void ButtonOnEnter(object sender, EventArgs e)
@@ -502,6 +506,49 @@ namespace PeachFox
             XOffset = 0;
             YOffset = 0;
             PaintTiles();
+        }
+
+        private void UpdateRow(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) 
+                return;
+            // Table Update
+            var row = dataGridView.Rows[e.RowIndex];
+            EnableRow(row, row.Cells[0].Value != null && row.Cells[0].Value.ToString().Length > 0);
+            CheckAnimation(row);
+            // Graphic Update
+        }
+
+        private void EnableRow(DataGridViewRow row, bool enable)
+        {
+            for (int i = 1; i < 3; i++)
+            {
+                row.Cells[i].ReadOnly = !enable;
+                row.Cells[i].Style.BackColor = !enable ? Color.Gray : Color.White;
+            }
+        }
+
+        private void CheckAnimation(DataGridViewRow row)
+        {
+            DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)row.Cells[2];
+            bool enable = cell.Value == cell.TrueValue;
+            for (int i = 3; i < 6; i++)
+            {
+                row.Cells[i].ReadOnly = !enable;
+                row.Cells[i].Style.BackColor = !enable ? Color.Gray : Color.White;
+            }
+        }
+
+        private void dataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            UpdateRow(sender, e);
+        }
+
+        private void buttonColor_Click(object sender, EventArgs e)
+        {
+            colorDialog.Color = characterGraphicBox.BackColor;
+            colorDialog.ShowDialog();
+            characterGraphicBox.BackColor = colorDialog.Color;
         }
 
         private void TileButtonPaint(object sender, PaintEventArgs e)
