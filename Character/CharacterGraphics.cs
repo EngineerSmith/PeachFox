@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
@@ -18,7 +14,9 @@ namespace PeachFox
             var row = dataGridView.Rows[e.RowIndex];
             EnableRow(row, row.Cells[0].Value != null && row.Cells[0].Value.ToString().Length > 0);
             CheckAnimation(row);
+
             // Graphic Update
+            ValidateFile(row.Cells[1].Value.ToString());
         }
 
         private void EnableRow(DataGridViewRow row, bool enable)

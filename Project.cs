@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Text.RegularExpressions;
 
 namespace PeachFox
 {
@@ -52,24 +44,27 @@ namespace PeachFox
             this.Hide();
         }
         
-        private bool ValidateFile(String path, Label hint)
+        private bool ValidateFile(String path, Label hint = null)
         {
             try
             {
                 if (File.Exists(path))
                 {
-                    hint.Text = "";
+                    if (hint != null)
+                        hint.Text = "";
                     return true;
                 }
                 else
                 {
-                    hint.Text = "File does not exist";
+                    if (hint != null)
+                        hint.Text = "File does not exist";
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                hint.Text = "EXCEP: " + ex.Message;
+                if (hint != null)
+                    hint.Text = "EXCEP: " + ex.Message;
                 return false;
             }
         }
