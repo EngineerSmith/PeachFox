@@ -93,13 +93,13 @@ namespace PeachFox
             Size imageSize = _graphicBoxImage.Size, targetSize = characterGraphicBox.Size;
             float scale = Math.Min((float)targetSize.Width / imageSize.Width,
                                    (float)targetSize.Height / imageSize.Height);
-            Rectangle rect = new Rectangle 
+            Rectangle rect = new Rectangle
             {
                 Width = (int)(scale * imageSize.Width),
-                Height = (int)(scale * imageSize.Height)
+                Height = (int)(scale * imageSize.Height),
+                X = (int)((targetSize.Width - (scale * imageSize.Width)) / 2.0f),
+                Y = (int)((targetSize.Height - (scale * imageSize.Height)) / 2.0f)
             };
-            rect.X = (int)((targetSize.Width - (scale * imageSize.Width)) / 2.0f);
-            rect.Y = (int)((targetSize.Height - (scale * imageSize.Height)) / 2.0f);
             g.DrawImage(_graphicBoxImage, rect);
 
             if (_graphicBoxAnimation.IsAnimated == false)
