@@ -463,7 +463,6 @@ namespace PeachFox
             CheckState state = checkBoxDraw.CheckState;
             if (state == CheckState.Unchecked || state == CheckState.Indeterminate)
             {
-
                 var bgList = data.Background.Keys.ToList();
                 bgList.Sort();
                 foreach (var bg in bgList)

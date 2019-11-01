@@ -28,6 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ProjectTabs = new System.Windows.Forms.TabControl();
             this.tabSettings = new System.Windows.Forms.TabPage();
             this.tabTileMap = new System.Windows.Forms.TabPage();
@@ -75,6 +81,7 @@
             this.tabCharacterControl = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.characterGraphicBox = new System.Windows.Forms.PictureBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.NameCell = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FileCell = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -83,6 +90,7 @@
             this.HeightCell = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TimeCell = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonColor = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -90,9 +98,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.characterGraphicBox = new System.Windows.Forms.PictureBox();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.buttonColor = new System.Windows.Forms.Button();
             this.ProjectTabs.SuspendLayout();
             this.tabTileMap.SuspendLayout();
             this.tabControllerTileMap.SuspendLayout();
@@ -115,9 +121,9 @@
             this.tabCharacter.SuspendLayout();
             this.tabCharacterControl.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.characterGraphicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.characterGraphicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // ProjectTabs
@@ -316,7 +322,7 @@
             // HintLabel
             // 
             this.HintLabel.AutoSize = true;
-            this.HintLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HintLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.HintLabel.ForeColor = System.Drawing.Color.Maroon;
             this.HintLabel.Location = new System.Drawing.Point(3, 26);
             this.HintLabel.Name = "HintLabel";
@@ -624,6 +630,18 @@
             this.tabPage3.Text = "Character Graphics";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // characterGraphicBox
+            // 
+            this.characterGraphicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.characterGraphicBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.characterGraphicBox.ImageLocation = "";
+            this.characterGraphicBox.Location = new System.Drawing.Point(626, 49);
+            this.characterGraphicBox.Name = "characterGraphicBox";
+            this.characterGraphicBox.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.characterGraphicBox.Size = new System.Drawing.Size(121, 450);
+            this.characterGraphicBox.TabIndex = 6;
+            this.characterGraphicBox.TabStop = false;
+            // 
             // dataGridView
             // 
             this.dataGridView.AllowUserToResizeRows = false;
@@ -643,51 +661,67 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridView.RowHeadersVisible = false;
-            this.dataGridView.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.Empty;
-            this.dataGridView.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Empty;
-            this.dataGridView.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Empty;
-            this.dataGridView.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.dataGridView.Size = new System.Drawing.Size(609, 450);
+            this.dataGridView.Size = new System.Drawing.Size(623, 450);
             this.dataGridView.TabIndex = 1;
+            this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             this.dataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.UpdateRow);
             // 
             // NameCell
             // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(129)))), ((int)(((byte)(122)))));
+            this.NameCell.DefaultCellStyle = dataGridViewCellStyle1;
             this.NameCell.HeaderText = "Name";
             this.NameCell.Name = "NameCell";
             this.NameCell.ToolTipText = "Name of graphic state";
             // 
             // FileCell
             // 
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Gray;
+            this.FileCell.DefaultCellStyle = dataGridViewCellStyle2;
             this.FileCell.HeaderText = "File";
             this.FileCell.Name = "FileCell";
             this.FileCell.ReadOnly = true;
+            this.FileCell.Width = 200;
             // 
             // AnimatedCell
             // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle3.NullValue = false;
+            this.AnimatedCell.DefaultCellStyle = dataGridViewCellStyle3;
             this.AnimatedCell.FalseValue = "false";
             this.AnimatedCell.HeaderText = "Is Animated";
             this.AnimatedCell.Name = "AnimatedCell";
             this.AnimatedCell.ReadOnly = true;
             this.AnimatedCell.TrueValue = "true";
+            this.AnimatedCell.Width = 70;
             // 
             // WidthCell
             // 
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Gray;
+            this.WidthCell.DefaultCellStyle = dataGridViewCellStyle4;
             this.WidthCell.HeaderText = "Width";
             this.WidthCell.Name = "WidthCell";
             this.WidthCell.ReadOnly = true;
+            this.WidthCell.Width = 50;
             // 
             // HeightCell
             // 
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Gray;
+            this.HeightCell.DefaultCellStyle = dataGridViewCellStyle5;
             this.HeightCell.HeaderText = "Height";
             this.HeightCell.Name = "HeightCell";
             this.HeightCell.ReadOnly = true;
+            this.HeightCell.Width = 50;
             // 
             // TimeCell
             // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Gray;
+            this.TimeCell.DefaultCellStyle = dataGridViewCellStyle6;
             this.TimeCell.HeaderText = "Time";
             this.TimeCell.Name = "TimeCell";
             this.TimeCell.ReadOnly = true;
+            this.TimeCell.Width = 50;
             // 
             // panel1
             // 
@@ -703,8 +737,19 @@
             this.panel1.Size = new System.Drawing.Size(744, 46);
             this.panel1.TabIndex = 5;
             // 
+            // buttonColor
+            // 
+            this.buttonColor.Location = new System.Drawing.Point(666, 3);
+            this.buttonColor.Name = "buttonColor";
+            this.buttonColor.Size = new System.Drawing.Size(75, 23);
+            this.buttonColor.TabIndex = 11;
+            this.buttonColor.Text = "Background Color";
+            this.buttonColor.UseVisualStyleBackColor = true;
+            this.buttonColor.Click += new System.EventHandler(this.buttonColor_Click);
+            // 
             // button3
             // 
+            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(327, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 20);
@@ -725,7 +770,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.label6.ForeColor = System.Drawing.Color.Maroon;
             this.label6.Location = new System.Drawing.Point(3, 26);
             this.label6.Name = "label6";
@@ -735,6 +780,7 @@
             // 
             // textBox2
             // 
+            this.textBox2.Enabled = false;
             this.textBox2.Location = new System.Drawing.Point(3, 3);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(184, 20);
@@ -742,6 +788,7 @@
             // 
             // button5
             // 
+            this.button5.Enabled = false;
             this.button5.Location = new System.Drawing.Point(193, 3);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(25, 20);
@@ -753,26 +800,6 @@
             // 
             this.openFileDialog1.FileName = "TileMap.lua";
             this.openFileDialog1.Title = "Open TileMap";
-            // 
-            // characterGraphicBox
-            // 
-            this.characterGraphicBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.characterGraphicBox.ImageLocation = "";
-            this.characterGraphicBox.Location = new System.Drawing.Point(612, 49);
-            this.characterGraphicBox.Name = "characterGraphicBox";
-            this.characterGraphicBox.Size = new System.Drawing.Size(135, 450);
-            this.characterGraphicBox.TabIndex = 6;
-            this.characterGraphicBox.TabStop = false;
-            // 
-            // buttonColor
-            // 
-            this.buttonColor.Location = new System.Drawing.Point(666, 3);
-            this.buttonColor.Name = "buttonColor";
-            this.buttonColor.Size = new System.Drawing.Size(75, 23);
-            this.buttonColor.TabIndex = 11;
-            this.buttonColor.Text = "Background Color";
-            this.buttonColor.UseVisualStyleBackColor = true;
-            this.buttonColor.Click += new System.EventHandler(this.buttonColor_Click);
             // 
             // Project
             // 
@@ -821,10 +848,10 @@
             this.tabCharacter.ResumeLayout(false);
             this.tabCharacterControl.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.characterGraphicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.characterGraphicBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -886,14 +913,14 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.PictureBox characterGraphicBox;
+        private System.Windows.Forms.Button buttonColor;
+        private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameCell;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileCell;
         private System.Windows.Forms.DataGridViewCheckBoxColumn AnimatedCell;
         private System.Windows.Forms.DataGridViewTextBoxColumn WidthCell;
         private System.Windows.Forms.DataGridViewTextBoxColumn HeightCell;
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeCell;
-        private System.Windows.Forms.PictureBox characterGraphicBox;
-        private System.Windows.Forms.Button buttonColor;
-        private System.Windows.Forms.ColorDialog colorDialog;
     }
 }

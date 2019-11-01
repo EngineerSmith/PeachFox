@@ -19,6 +19,9 @@ namespace PeachFox
             // TileMap tab
             EnableTileMap(false);
             HintLabel.Text = "";
+
+            // Character Tab
+            SetUpCharacterGraphics();
         }
 
         private void FormDisposed(object sender, EventArgs e)
