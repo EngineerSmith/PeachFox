@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace PeachFox
 {
-    using Images = Dictionary<int, Bitmap>;
+    using Images = SortedDictionary<int, Bitmap>;
 
     public static class TileButtonDataHelper
     {

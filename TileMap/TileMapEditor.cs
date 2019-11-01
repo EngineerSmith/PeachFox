@@ -24,17 +24,15 @@ namespace PeachFox
             get => _tileData;
             set
             {
-                if (_tileData != null)
-                    _tileData.Dispose();
                 _tileData = value;
                 if (value != null)
                 {
                     if (_tileData.shortpath == null && _tileData.fullpath.Length != 0)
                     {
-                        int i = _tileData.fullpath.IndexOf(_projectPath);
+                        int i = _tileData.fullpath.IndexOf(ProjectPath);
                         if (i != -1)
                         {
-                            _tileData.shortpath = _tileData.fullpath.Substring(i + _projectPath.Length + 1);
+                            _tileData.shortpath = _tileData.fullpath.Substring(i + ProjectPath.Length + 1);
                             _tileData.shortpath = _tileData.shortpath.Replace("\\", "/");
                         }
                     }
@@ -49,7 +47,7 @@ namespace PeachFox
             HintLabel.Text = "";
         }
 
-        private void SetUpEditor()
+        private void GenerateEditor()
         {
             if (_tileMap == null)
                 return;
@@ -76,43 +74,9 @@ namespace PeachFox
 
                     Tile tile = _tiles[posX][posY];
                     // Background
-                    foreach (var kvp in tile.Background)
-                    {
-                        TileGraphic graphics = (TileGraphic)kvp.Value;
-                        string file = _projectPath + "\\" + graphics.File;
-                        if (File.Exists(file))
-                        {
-                            TileData.Quad quad;
-                            quad.X = graphics.Quad.X;
-                            quad.Y = graphics.Quad.Y;
-                            quad.W = graphics.Quad.Width;
-                            quad.H = graphics.Quad.Height;
-                            if (tinyImages.ContainsKey(file) == false)
-                                tinyImages.Add(file, new Dictionary<TileData.Quad, Bitmap>());
-                            if (tinyImages[file].ContainsKey(quad) == false)
-                                LoadImage(tinyImages, images, i, j, file, quad);
-                            Squares[i][j].Item2.Background.Set(kvp.Key.GetInt(), tinyImages[file][quad]);
-                        }
-                    }
+                    SetImage(Squares[i][j].Item2.Background, tinyImages, images, i, j, tile.Background);
                     // Foreground
-                    foreach (var kvp in tile.Foreground)
-                    {
-                        TileGraphic graphics = (TileGraphic)kvp.Value;
-                        string file = _projectPath + "\\" + graphics.File;
-                        if (File.Exists(file))
-                        {
-                            TileData.Quad quad;
-                            quad.X = graphics.Quad.X;
-                            quad.Y = graphics.Quad.Y;
-                            quad.W = graphics.Quad.Width;
-                            quad.H = graphics.Quad.Height;
-                            if (tinyImages.ContainsKey(file) == false)
-                                tinyImages.Add(file, new Dictionary<TileData.Quad, Bitmap>());
-                            if (tinyImages[file].ContainsKey(quad) == false)
-                                LoadImage(tinyImages, images, i, j, file, quad);
-                            Squares[i][j].Item2.Foreground.Set(kvp.Key.GetInt(), tinyImages[file][quad]);
-                        }
-                    }
+                    SetImage(Squares[i][j].Item2.Foreground, tinyImages, images, i, j, tile.Foreground);
                     // Colliable
                     if (tile.Physics.Colliable && checkBox1.Checked)
                         Squares[i][j].Item1.FlatAppearance.BorderColor = Color.Red;
@@ -125,6 +89,28 @@ namespace PeachFox
                 image.Value.Dispose();
 
             Refresh();
+        }
+
+        private void SetImage(SortedDictionary<int, Bitmap> SquareImage, Dictionary<string, Dictionary<TileData.Quad, Bitmap>> tinyImages, Dictionary<string, Bitmap> images, int i, int j, LsonLib.LsonDict imageDict)
+        {
+            foreach (var kvp in imageDict)
+            {
+                TileGraphic graphics = (TileGraphic)kvp.Value;
+                string file = ProjectPath + "\\" + graphics.File;
+                if (File.Exists(file))
+                {
+                    TileData.Quad quad;
+                    quad.X = graphics.Quad.X;
+                    quad.Y = graphics.Quad.Y;
+                    quad.W = graphics.Quad.Width;
+                    quad.H = graphics.Quad.Height;
+                    if (tinyImages.ContainsKey(file) == false)
+                        tinyImages.Add(file, new Dictionary<TileData.Quad, Bitmap>());
+                    if (tinyImages[file].ContainsKey(quad) == false)
+                        LoadImage(tinyImages, images, i, j, file, quad);
+                    SquareImage.Set(kvp.Key.GetInt(), tinyImages[file][quad]);
+                }
+            }
         }
 
         private void LoadImage(Dictionary<string, Dictionary<TileData.Quad, Bitmap>> tinyImages, Dictionary<string, Bitmap> images, int i, int j, string file, TileData.Quad quad)
@@ -156,24 +142,25 @@ namespace PeachFox
                 Squares.Add(new List<Tuple<Button, TileButtonData>>(height));
                 for (int h = 0; h < height; h++)
                 {
-                    Squares[w].Add(new Tuple<Button, TileButtonData>(new Button(), new TileButtonData()));
-                    panelEditor.Controls.Add(Squares[w][h].Item1);
-                    Squares[w][h].Item1.Location = new System.Drawing.Point(3 + squareSize * w, 3 + squareSize * h);
-                    Squares[w][h].Item1.Name = w + "." + h;
-                    Squares[w][h].Item1.Size = new System.Drawing.Size(squareSize, squareSize);
-                    Squares[w][h].Item1.TabIndex = 2;
-                    Squares[w][h].Item1.UseVisualStyleBackColor = true;
+                    Squares[w].Add(new Tuple<Button, TileButtonData>(new Button {
+                        Location = new Point(3 + squareSize * w, 3 + squareSize * h),
+                        Name = w + "." + h,
+                        Size = new Size(squareSize, squareSize),
+                        TabIndex = 2,
+                        UseVisualStyleBackColor = true,
+                        Image = null,
+                        BackgroundImage = null,
+                        BackgroundImageLayout = ImageLayout.Zoom,
+                        ImageAlign = ContentAlignment.MiddleCenter,
+                        FlatStyle = FlatStyle.Flat,
+                    }, new TileButtonData()));
                     Squares[w][h].Item1.Click += new EventHandler(this.TileButtonClick);
                     Squares[w][h].Item1.MouseEnter += new EventHandler(this.ButtonOnEnter);
                     Squares[w][h].Item1.MouseLeave += new EventHandler(this.ButtonOnLeave);
                     Squares[w][h].Item1.Paint += new PaintEventHandler(this.TileButtonPaint);
-                    Squares[w][h].Item1.Image = null;
-                    Squares[w][h].Item1.BackgroundImage = null;
-                    Squares[w][h].Item1.BackgroundImageLayout = ImageLayout.Zoom;
-                    Squares[w][h].Item1.ImageAlign = ContentAlignment.MiddleCenter;
-                    Squares[w][h].Item1.FlatStyle = FlatStyle.Flat;
                     Squares[w][h].Item1.FlatAppearance.BorderSize = 2;
                     Squares[w][h].Item1.FlatAppearance.BorderColor = Color.LightGray;
+                    panelEditor.Controls.Add(Squares[w][h].Item1);
                 }
             }
         }
@@ -269,7 +256,7 @@ namespace PeachFox
         private void OpenFolderButton_Click(object sender, EventArgs e)
         {
             EnableTileMap(false);
-            openFileDialog1.InitialDirectory = _projectPath + "\\assets";
+            openFileDialog1.InitialDirectory = ProjectPath + "\\assets";
             openFileDialog1.Filter = "(*.lua)|*.lua|All files (*.*)|*.*";
             openFileDialog1.ShowDialog();
             tilemapPath.Text = openFileDialog1.FileName;
@@ -283,7 +270,7 @@ namespace PeachFox
                 catch (Exception ex) { HintLabel.Text = "EXCEP: " + ex.Message; return; }
                 EnableTileMap(true);
                 SetupTileMap();
-                SetUpEditor();
+                GenerateEditor();
             }
         }
 
@@ -422,7 +409,7 @@ namespace PeachFox
         {
             _tileMap.Map = _tiles;
 
-            saveFileDialog1.InitialDirectory = _projectPath + "\\assets";
+            saveFileDialog1.InitialDirectory = ProjectPath + "\\assets";
             saveFileDialog1.Filter = "(*.lua)|*.lua|All files (*.*)|*.*";
             saveFileDialog1.ShowDialog();
 
@@ -457,51 +444,48 @@ namespace PeachFox
             PaintTiles();
         }
 
+        private Pen TilePen_Red = new Pen(Color.Red) { Width = 2};
+        private Pen TilePen_LightGrey = new Pen(Color.FromArgb(150, Color.LightGray));
+
         private void TileButtonPaint(object sender, PaintEventArgs e)
         {
             Button button = (Button)sender;
             TileButtonData data = GetData(button);
-            if (data == null) return;
+            if (data == null) 
+                return;
 
             Graphics g = e.Graphics;
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-
+            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighSpeed;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
+            
             CheckState state = checkBoxDraw.CheckState;
             if (state == CheckState.Unchecked || state == CheckState.Indeterminate)
             {
-                var bgList = data.Background.Keys.ToList();
-                bgList.Sort();
-                foreach (var bg in bgList)
-                    g.DrawImage(data.Background[bg], 0.0f, 0.0f);
+                foreach (var bg in data.Background)
+                    g.DrawImage(bg.Value, 0, 0);
             }
             if (state == CheckState.Checked || state == CheckState.Indeterminate)
             {
-                var fgList = data.Foreground.Keys.ToList();
-                fgList.Sort();
-                foreach (var fg in fgList)
-                    g.DrawImage(data.Foreground[fg], new Rectangle(5, 5, 40, 40), 0, 0, 50, 50, GraphicsUnit.Pixel);
+                foreach (var fg in data.Foreground)
+                    g.DrawImage(fg.Value, new Rectangle(5, 5, 40, 40), 0, 0, 50, 50, GraphicsUnit.Pixel);
             }
             if (button.FlatAppearance.BorderColor == Color.Red)
             {
-                Pen p = new Pen(Color.Red);
-                p.Width = 2;
-                g.DrawLine(p, 0, 0, 50, 50);
-                g.DrawLine(p, 0, 50, 50, 0);
-                p.Dispose();
+                g.DrawLine(TilePen_Red, 0, 0, 50, 50);
+                g.DrawLine(TilePen_Red, 0, 50, 50, 0);
             }
 
             if (data.IsHovered)
             {
-                Pen p = new Pen(Color.FromArgb(150, Color.LightGray));
-                g.FillRectangle(p.Brush, 0, 0, 50, 50);
-                p.Dispose();
+                g.FillRectangle(TilePen_LightGrey.Brush, 0, 0, 50, 50);
             }
         }
 
         private void DisposeTileMapEditor(object sender, EventArgs e)
         {
-            if (_tileData != null)
-                _tileData.Dispose();
+            TilePen_Red.Dispose();
+            TilePen_LightGrey.Dispose();
         }
     }
 }

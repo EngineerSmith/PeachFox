@@ -6,12 +6,11 @@ namespace PeachFox
 {
     public partial class Project : Form
     {
-        private string _projectPath;
-        public string ProjectPath { get => _projectPath; }
+        public string ProjectPath { get; private set; }
 
         public Project(String projectPath)
         {
-            _projectPath = projectPath;
+            ProjectPath = projectPath;
 
             InitializeComponent();
             this.Disposed += new EventHandler(DisposeForm);
@@ -37,13 +36,7 @@ namespace PeachFox
 
         private void Project_Resize(object sender, EventArgs e)
         {
-            SetUpEditor();
-        }
-
-        private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Program.ShowOpenProjectForm();
-            this.Hide();
+            GenerateEditor();
         }
         
         private bool ValidateFile(String path, Label hint = null)

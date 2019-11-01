@@ -22,9 +22,6 @@ namespace PeachFox
         {
             public int X, Y, Num;
         }
-
-        public void Dispose()
-        { }
     }
 
 }

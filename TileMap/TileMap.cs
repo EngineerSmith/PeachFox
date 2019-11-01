@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using LsonLib;
 using System.IO;
 
-
-
 namespace PeachFox
 {
     public class TileGraphic
@@ -22,7 +20,6 @@ namespace PeachFox
             get => (Quad)_root["Quad"];
             set => _root["Quad"] = (LsonDict)value;
         }
-
         public Animation Animation
         {
             set => _root["Animation"] = (LsonDict)value;
@@ -132,7 +129,6 @@ namespace PeachFox
             _root.AddIfNotExist("Height", new LsonNumber(0));
             _root.AddIfNotExist("Scale", new LsonNumber(1));
         }
-
     }
     public class Animation
     {
@@ -223,7 +219,6 @@ namespace PeachFox
             Width = 0;
             Height = 0;
         }
-
         public Quad(int x, int y, int width, int height)
         {
             _root = new LsonDict();
@@ -232,7 +227,6 @@ namespace PeachFox
             Width = width;
             Height = height;
         }
-
         public Quad(LsonDict root)
         {
             _root = root;
@@ -299,7 +293,7 @@ namespace PeachFox
         {
             get => (Physics)_root["Physics"];
             set => _root["Physics"] = (LsonDict)value;
-    }
+        }
 
         private LsonDict _root;
         public static explicit operator LsonDict(Tile value)
@@ -337,11 +331,7 @@ namespace PeachFox
     {
         private readonly string _filepath;
         private Dictionary<string, LsonValue> _tileMapRoot;
-        private string _activeMap;
-        public string ActiveMap
-        {
-            get => _activeMap;
-        }
+        public string ActiveMap { get; private set; }
 
         public List<string> MapNames { get; }
         public GraphicsData GraphicsData
@@ -354,13 +344,11 @@ namespace PeachFox
             get
             {
                 Dictionary<int, Dictionary<int, Tile>> tiles = new Dictionary<int, Dictionary<int, Tile>>();
-                foreach (var i in _tileMapRoot[_activeMap]["Map"].GetDict())
+                foreach (var i in _tileMapRoot[ActiveMap]["Map"].GetDict())
                 {
                     tiles[i.Key.GetInt()] = new Dictionary<int, Tile>();
                     foreach (var j in i.Value.GetDict())
-                    {
                         tiles[i.Key.GetInt()][j.Key.GetInt()] = (Tile)j.Value.GetDict();
-                    }
                 }
                 return tiles;
             }
@@ -368,14 +356,14 @@ namespace PeachFox
             {
                 foreach (var i in value)
                 {
-                    if (_tileMapRoot[_activeMap]["Map"].ContainsKey(i.Key) == false)
-                        _tileMapRoot[_activeMap]["Map"].Add(i.Key, new LsonDict());
+                    if (_tileMapRoot[ActiveMap]["Map"].ContainsKey(i.Key) == false)
+                        _tileMapRoot[ActiveMap]["Map"].Add(i.Key, new LsonDict());
                     foreach (var j in value[i.Key])
                     {
-                        if (_tileMapRoot[_activeMap]["Map"][i.Key].ContainsKey(j.Key) == false)
-                            _tileMapRoot[_activeMap]["Map"][i.Key].Add(j.Key, (LsonValue)value[i.Key][j.Key]);
+                        if (_tileMapRoot[ActiveMap]["Map"][i.Key].ContainsKey(j.Key) == false)
+                            _tileMapRoot[ActiveMap]["Map"][i.Key].Add(j.Key, (LsonValue)value[i.Key][j.Key]);
                         else
-                            _tileMapRoot[_activeMap]["Map"][i.Key][j.Key] = (LsonValue)value[i.Key][j.Key];
+                            _tileMapRoot[ActiveMap]["Map"][i.Key][j.Key] = (LsonValue)value[i.Key][j.Key];
                     }
                 }
             }
@@ -389,7 +377,7 @@ namespace PeachFox
             MapNames = new List<string>();
             foreach (var map in _tileMapRoot)
                 MapNames.Add(map.Key);
-            _activeMap = MapNames.Count > 0 ? MapNames[0] : "";
+            ActiveMap = MapNames.Count > 0 ? MapNames[0] : "";
         }
 
         public void NewMap(string name)
@@ -404,7 +392,7 @@ namespace PeachFox
             var result = MapNames.FindIndex(x => x == name);
             if (result == -1)
                 throw new IndexOutOfRangeException(name + " does not exist in map");
-            _activeMap = name;
+            ActiveMap = name;
         }
         
         public bool RenameMap(string oldName, string newName)
@@ -418,7 +406,7 @@ namespace PeachFox
             MapNames.Remove(oldName);
             MapNames.Add(newName);
             if (ActiveMap == oldName)
-                _activeMap = newName;
+                ActiveMap = newName;
 
             return true;
         }
