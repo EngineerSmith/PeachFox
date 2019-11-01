@@ -14,20 +14,19 @@ namespace PeachFox
             _projectPath = projectPath;
 
             InitializeComponent();
-            this.Disposed += new EventHandler(FormDisposed);
+            this.Disposed += new EventHandler(DisposeForm);
 
             // TileMap tab
-            EnableTileMap(false);
-            HintLabel.Text = "";
+            SetUpTileMapEditor();
 
             // Character Tab
             SetUpCharacterGraphics();
         }
 
-        private void FormDisposed(object sender, EventArgs e)
+        private void DisposeForm(object sender, EventArgs e)
         {
-            if (_tileData != null)
-                _tileData.Dispose();
+            DisposeTileMapEditor(sender, e);
+            DisposeCharacterGraphics(sender, e);
         }
 
         private void Project_FormClosed(object sender, FormClosedEventArgs e)

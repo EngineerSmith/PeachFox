@@ -43,6 +43,12 @@ namespace PeachFox
             }
         }
 
+        private void SetUpTileMapEditor()
+        {
+            EnableTileMap(false);
+            HintLabel.Text = "";
+        }
+
         private void SetUpEditor()
         {
             if (_tileMap == null)
@@ -490,6 +496,12 @@ namespace PeachFox
                 g.FillRectangle(p.Brush, 0, 0, 50, 50);
                 p.Dispose();
             }
+        }
+
+        private void DisposeTileMapEditor(object sender, EventArgs e)
+        {
+            if (_tileData != null)
+                _tileData.Dispose();
         }
     }
 }

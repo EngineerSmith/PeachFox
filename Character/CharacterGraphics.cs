@@ -24,6 +24,12 @@ namespace PeachFox
             _graphicBoxAnimation.IsAnimated = false;
         }
 
+        private void DisposeCharacterGraphics(object sender, EventArgs e)
+        {
+            if( _graphicBoxImage != null)
+                _graphicBoxImage.Dispose();
+        }
+
         private void UpdateRow(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
