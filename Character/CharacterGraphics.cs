@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
+using LsonLib;
 
 namespace PeachFox
 {
@@ -18,6 +20,9 @@ namespace PeachFox
         private Image _graphicBoxImage;
         private AnimationImage _graphicBoxAnimation;
 
+        string AnimationFn = "Animation:New";
+        string ImageFn = "Image:New";
+
         private void SetUpCharacterGraphics()
         {
             characterGraphicBox.Paint += CharacterGraphicBoxPaint;
@@ -28,6 +33,49 @@ namespace PeachFox
         {
             if( _graphicBoxImage != null)
                 _graphicBoxImage.Dispose();
+        }
+
+        private string ConvertTableToString(DataGridView grid)
+        {
+            Dictionary<string, LsonValue> graphics = new Dictionary<string, LsonValue>();
+            graphics.Add("Graphics", new LsonDict());
+
+            LsonDict g = (LsonDict)graphics["Graphics"];
+
+            foreach(DataGridViewRow row in grid.Rows)
+            {
+                string state = GetString(row.Cells[(int)AnimationCell.Name]);
+                if (state == null) continue;
+                string path = GetString(row.Cells[(int)AnimationCell.File]);
+                if (path == null) continue;
+
+                DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)row.Cells[(int)AnimationCell.IsAnimated];
+                bool IsAnimated = cell.Value == cell.TrueValue;
+
+                int width = row.Cells[(int)AnimationCell.Width].Value != null ? GetValueFromString(row.Cells[(int)AnimationCell.Width].Value.ToString()) : -1;
+                int height = row.Cells[(int)AnimationCell.Height].Value != null ? GetValueFromString(row.Cells[(int)AnimationCell.Height].Value.ToString()) : -1;
+                int time = row.Cells[(int)AnimationCell.Time].Value != null ? GetValueFromString(row.Cells[(int)AnimationCell.Time].Value.ToString()) : -1;
+                if (width == -1 || height == -1 || time == -1)
+                    IsAnimated = false;
+
+                //TODO Added variables for functions so they could be changed via the form 
+                if (IsAnimated)
+                    g[state] = $"{AnimationFn}({path}, {width}, {height}, {time})";
+                else
+                    g[state] = $"{ImageFn}({path})";
+            }
+            return LsonVars.ToString(graphics);
+        }
+        private static string GetString(DataGridViewCell cell)
+        {
+            try
+            {
+                return cell.Value.ToString().Trim();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private void UpdateRow(object sender, DataGridViewCellEventArgs e)
