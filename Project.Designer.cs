@@ -94,7 +94,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBoxCharacterGraphicsFile = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -729,7 +729,7 @@
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.textBoxCharacterGraphicsFile);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
@@ -749,13 +749,13 @@
             // 
             // button3
             // 
-            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(327, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 20);
             this.button3.TabIndex = 10;
             this.button3.Text = "Save As...";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -778,13 +778,13 @@
             this.label6.TabIndex = 5;
             this.label6.Text = "HINT TEXT";
             // 
-            // textBox2
+            // textBoxCharacterGraphicsFile
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(3, 3);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(184, 20);
-            this.textBox2.TabIndex = 0;
+            this.textBoxCharacterGraphicsFile.Enabled = false;
+            this.textBoxCharacterGraphicsFile.Location = new System.Drawing.Point(3, 3);
+            this.textBoxCharacterGraphicsFile.Name = "textBoxCharacterGraphicsFile";
+            this.textBoxCharacterGraphicsFile.Size = new System.Drawing.Size(184, 20);
+            this.textBoxCharacterGraphicsFile.TabIndex = 0;
             // 
             // button5
             // 
@@ -911,7 +911,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxCharacterGraphicsFile;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.PictureBox characterGraphicBox;
         private System.Windows.Forms.Button buttonColor;

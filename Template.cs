@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace PeachFox
 {
@@ -10,23 +11,19 @@ namespace PeachFox
     {
         public static string FillTemplate(string template, Dictionary<string, string> dictionary)
         {
-            const string whitespace = " ";
-            var arr = template.Split(whitespace.ToCharArray());
-            for (int i = 0; i < arr.Length; i++)
+            var words = Regex.Split(template, @"(?=[ \r\n])");
+            for (int i = 0; i < words.Length; i++)
             {
-                switch (arr[i])
+                string word = words[i].Trim();
+                switch (word)
                 {
                     case "TABLE":
-                        {
-                            InsertTable(ref arr, ref i, dictionary);
-                            break;
-                        }
+                        InsertTable(ref words, ref i, dictionary); break;
                     default:
                         continue;
-
                 }
             }
-            return string.Join(whitespace, arr); ;
+            return string.Join("", words);
         }
 
         private static void InsertTable(ref string[] arr, ref int index, Dictionary<string, string> dictionary)
@@ -36,15 +33,15 @@ namespace PeachFox
                 arr[index] = "";
                 return;
             }
-            string key = arr[index + 1];
-            arr[index + 1] = "\n";
+            string key = arr[index + 1].Trim();
+            arr[index + 1] = "";
             string value = dictionary[key];
             if (value == null)
             {
                 arr[index] = "";
                 return;
             }
-            arr[index] = value;
+            arr[index] = " " + value;
             index++;
         }
 

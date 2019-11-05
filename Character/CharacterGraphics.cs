@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 using LsonLib;
 
 namespace PeachFox
@@ -21,7 +22,10 @@ namespace PeachFox
         private AnimationImage _graphicBoxAnimation;
 
         string AnimationFn = "Animation:New";
+        string AnimationFnImport = "src/graphics/Animation";
         string ImageFn = "Image:New";
+        string ImageFnImport = "src/graphics/Image";
+        string GraphicsTableName = "graphics";
 
         private void SetUpCharacterGraphics()
         {
@@ -35,12 +39,27 @@ namespace PeachFox
                 _graphicBoxImage.Dispose();
         }
 
+        private void ExportTemplate(string path)
+        {
+            string template = $"import \"{AnimationFnImport}\"\r\n" +
+                              $"import \"{ImageFnImport}\"\r\n" +
+                              $"local TABLE {GraphicsTableName}\r\n" +
+                              $"return {GraphicsTableName}";
+
+            Dictionary<string, string> dictionary = new Dictionary<string, string> 
+                                        { { GraphicsTableName, ConvertTableToString(dataGridView) } };
+            string export = Template.FillTemplate(template, dictionary);
+
+            File.WriteAllText(path, export);
+            textBoxCharacterGraphicsFile.Text = path;
+        }
+
         private string ConvertTableToString(DataGridView grid)
         {
             Dictionary<string, LsonValue> graphics = new Dictionary<string, LsonValue>();
-            graphics.Add("Graphics", new LsonDict());
+            graphics.Add(GraphicsTableName, new LsonDict());
 
-            LsonDict g = (LsonDict)graphics["Graphics"];
+            LsonDict g = (LsonDict)graphics[GraphicsTableName];
 
             foreach(DataGridViewRow row in grid.Rows)
             {
@@ -52,19 +71,19 @@ namespace PeachFox
                 DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)row.Cells[(int)AnimationCell.IsAnimated];
                 bool IsAnimated = cell.Value == cell.TrueValue;
 
-                int width = row.Cells[(int)AnimationCell.Width].Value != null ? GetValueFromString(row.Cells[(int)AnimationCell.Width].Value.ToString()) : -1;
-                int height = row.Cells[(int)AnimationCell.Height].Value != null ? GetValueFromString(row.Cells[(int)AnimationCell.Height].Value.ToString()) : -1;
-                int time = row.Cells[(int)AnimationCell.Time].Value != null ? GetValueFromString(row.Cells[(int)AnimationCell.Time].Value.ToString()) : -1;
+                int width = row.Cells[(int)AnimationCell.Width].Value != null ? GetIntFromString(row.Cells[(int)AnimationCell.Width].Value.ToString()) : -1;
+                int height = row.Cells[(int)AnimationCell.Height].Value != null ? GetIntFromString(row.Cells[(int)AnimationCell.Height].Value.ToString()) : -1;
+                float time = row.Cells[(int)AnimationCell.Time].Value != null ? GetFloatFromString(row.Cells[(int)AnimationCell.Time].Value.ToString()) : -1;
                 if (width == -1 || height == -1 || time == -1)
                     IsAnimated = false;
 
                 //TODO Added variables for functions so they could be changed via the form 
                 if (IsAnimated)
-                    g[state] = $"{AnimationFn}({path}, {width}, {height}, {time})";
+                    g[state] = new LsonFunc($"{AnimationFn}(\"{path}\", {width}, {height}, {time})");
                 else
-                    g[state] = $"{ImageFn}({path})";
+                    g[state] = new LsonFunc($"{ImageFn}(\"{path}\")");
             }
-            return LsonVars.ToString(graphics);
+            return LsonVars.ToString(graphics).Substring(2);
         }
         private static string GetString(DataGridViewCell cell)
         {
@@ -105,8 +124,8 @@ namespace PeachFox
 
                     DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)row.Cells[2];
                     _graphicBoxAnimation.IsAnimated = cell.Value == cell.TrueValue;
-                    _graphicBoxAnimation.Width = row.Cells[(int)AnimationCell.Width].Value != null ? GetValueFromString(row.Cells[(int)AnimationCell.Width].Value.ToString()) : -1;
-                    _graphicBoxAnimation.Height = row.Cells[(int)AnimationCell.Height].Value != null ? GetValueFromString(row.Cells[(int)AnimationCell.Height].Value.ToString()) : -1;
+                    _graphicBoxAnimation.Width = row.Cells[(int)AnimationCell.Width].Value != null ? GetIntFromString(row.Cells[(int)AnimationCell.Width].Value.ToString()) : -1;
+                    _graphicBoxAnimation.Height = row.Cells[(int)AnimationCell.Height].Value != null ? GetIntFromString(row.Cells[(int)AnimationCell.Height].Value.ToString()) : -1;
                     if (_graphicBoxAnimation.Width == -1 || _graphicBoxAnimation.Height == -1)
                         _graphicBoxAnimation.IsAnimated = false;
                 }
@@ -121,13 +140,27 @@ namespace PeachFox
             }
         }
 
-        private int GetValueFromString(string str)
+        private int GetIntFromString(string str)
         {
             if (str == null || str.Length < 0)
                 return -1;
             try
             {
                 return int.Parse(str);
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+        private float GetFloatFromString(string str)
+        {
+            if (str == null || str.Length < 0)
+                return -1;
+            try
+            {
+                return float.Parse(str);
             }
             catch
             {
@@ -229,6 +262,15 @@ namespace PeachFox
                 return;
             var row = dataGridView.Rows[e.RowIndex];
             GraphicValidation(row);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.InitialDirectory = ProjectPath + "\\assets";
+            saveFileDialog1.Filter = "(*.lua)|*.lua|All files (*.*)|*.*";
+            saveFileDialog1.ShowDialog();
+
+            ExportTemplate(saveFileDialog1.FileName);
         }
     }
 }

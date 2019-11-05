@@ -411,7 +411,9 @@ namespace PeachFox
 
             saveFileDialog1.InitialDirectory = ProjectPath + "\\assets";
             saveFileDialog1.Filter = "(*.lua)|*.lua|All files (*.*)|*.*";
-            saveFileDialog1.ShowDialog();
+            var result = saveFileDialog1.ShowDialog();
+            if (result != DialogResult.OK && result != DialogResult.Yes) 
+                return;
 
             File.WriteAllText(saveFileDialog1.FileName, _tileMap.String());
             tilemapPath.Text = saveFileDialog1.FileName;
