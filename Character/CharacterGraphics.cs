@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
 using LsonLib;
+using System.Linq;
 
 namespace PeachFox
 {
@@ -26,6 +27,10 @@ namespace PeachFox
         string ImageFn = "Image:New";
         string ImageFnImport = "src/graphics/Image";
         string GraphicsTableName = "graphics";
+
+        private readonly Color ErrorColor =  Color.FromArgb(255, 129, 122);
+        private readonly Color EnableColor = Color.White;
+        private readonly Color DisableColor = Color.Gray;
 
         private void SetUpCharacterGraphics()
         {
@@ -99,14 +104,23 @@ namespace PeachFox
 
         private void UpdateRow(object sender, DataGridViewCellEventArgs e)
         {
+            ValidateGrid(dataGridView);
+
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 return;
-            // Table Update
-            var row = dataGridView.Rows[e.RowIndex];
-            CheckRowValidation(row);
-            CheckAnimation(row);
 
+            var row = dataGridView.Rows[e.RowIndex];
             GraphicValidation(row);
+
+            button3.Enabled = CanExport(row);
+        }
+
+        private bool CanExport(DataGridViewRow row)
+        {
+            foreach(DataGridViewCell cell in row.Cells)
+                if (cell.Style.BackColor == ErrorColor)
+                    return false;
+            return true;
         }
 
         private void GraphicValidation(DataGridViewRow row)
@@ -126,15 +140,26 @@ namespace PeachFox
                     _graphicBoxAnimation.IsAnimated = cell.Value == cell.TrueValue;
                     _graphicBoxAnimation.Width = row.Cells[(int)AnimationCell.Width].Value != null ? GetIntFromString(row.Cells[(int)AnimationCell.Width].Value.ToString()) : -1;
                     _graphicBoxAnimation.Height = row.Cells[(int)AnimationCell.Height].Value != null ? GetIntFromString(row.Cells[(int)AnimationCell.Height].Value.ToString()) : -1;
-                    if (_graphicBoxAnimation.Width == -1 || _graphicBoxAnimation.Height == -1)
+                    float time = row.Cells[(int)AnimationCell.Time].Value != null ? GetFloatFromString(row.Cells[(int)AnimationCell.Time].Value.ToString()) : -1;
+                    if (_graphicBoxAnimation.Width <= 0 || _graphicBoxAnimation.Height <= 0 || time <= 0)
                         _graphicBoxAnimation.IsAnimated = false;
+
+                    if (cell.Value == cell.TrueValue)
+                    {
+                        if (_graphicBoxAnimation.Width <= 0)
+                            row.Cells[(int)AnimationCell.Width].Style.BackColor = ErrorColor;
+                        if (_graphicBoxAnimation.Height <= 0)
+                            row.Cells[(int)AnimationCell.Height].Style.BackColor = ErrorColor;
+                        if (time <= 0)
+                            row.Cells[(int)AnimationCell.Time].Style.BackColor = ErrorColor;
+                    }
                 }
                 else
                 {
                     characterGraphicBox.Image = null;
                     _graphicBoxAnimation.IsAnimated = false;
-                    if (row.Cells[(int)AnimationCell.File].Style.BackColor == Color.White)
-                        row.Cells[(int)AnimationCell.File].Style.BackColor = Color.FromArgb(255, 129, 122);
+                    if (row.Cells[(int)AnimationCell.File].Style.BackColor == EnableColor)
+                        row.Cells[(int)AnimationCell.File].Style.BackColor = ErrorColor;
                 }
                 characterGraphicBox.Refresh();
             }
@@ -189,7 +214,7 @@ namespace PeachFox
             };
             g.DrawImage(_graphicBoxImage, rect);
 
-            if (_graphicBoxAnimation.IsAnimated == false)
+            if (_graphicBoxAnimation.IsAnimated == false || _graphicBoxAnimation.Width <= 0 || _graphicBoxAnimation.Height <= 0)
                 return;
 
             Pen p = new Pen(Color.FromArgb(150, Color.Red)) {
@@ -215,32 +240,68 @@ namespace PeachFox
 
         private void CheckRowValidation(DataGridViewRow row)
         {
-            bool enable = row.Cells[(int)AnimationCell.Name].Value != null && row.Cells[(int)AnimationCell.Name].Value.ToString().Trim().Length > 0;
+            bool enable = row.Cells[(int)AnimationCell.Name].Style.BackColor != ErrorColor;
+
             if (enable)
                 row.Cells[(int)AnimationCell.Name].Value = row.Cells[(int)AnimationCell.Name].Value.ToString().Trim();
-            row.Cells[(int)AnimationCell.Name].Style.BackColor = enable ? Color.White : Color.FromArgb(255, 129, 122);
 
             for (int i = 1; i < 3; i++)
             {
                 row.Cells[i].ReadOnly = !enable;
-                row.Cells[i].Style.BackColor = !enable ? Color.Gray : Color.White;
+                row.Cells[i].Style.BackColor = enable ? EnableColor : DisableColor;
             }
 
-            if (row.Cells[(int)AnimationCell.File].Value != null)
-                if (row.Cells[(int)AnimationCell.File].Value.ToString().Trim().Length > 0)
-                    row.Cells[(int)AnimationCell.File].Value = row.Cells[(int)AnimationCell.File].Value.ToString().Trim();
-                else if(row.Cells[(int)AnimationCell.File].Style.BackColor == Color.White)
-                    row.Cells[(int)AnimationCell.File].Style.BackColor = Color.FromArgb(255, 129, 122);
+            DataGridViewCell FileCell = row.Cells[(int)AnimationCell.File];
+
+            if (FileCell.Value != null)
+                if (FileCell.Value.ToString().Trim().Length > 0)
+                    FileCell.Value = row.Cells[(int)AnimationCell.File].Value.ToString().Trim();
+                else
+                    FileCell.Style.BackColor = ErrorColor;
+            else
+                FileCell.Style.BackColor = ErrorColor;
+        }
+
+
+        private void ValidateGrid(DataGridView grid)
+        {
+            Dictionary<string, List<DataGridViewCell>> names = new Dictionary<string, List<DataGridViewCell>>();
+
+            foreach(DataGridViewRow row in grid.Rows)
+            {
+                if (row.Cells[(int)AnimationCell.Name].Value == null) 
+                    continue;
+                DataGridViewCell name = row.Cells[(int)AnimationCell.Name];
+                name.Value = name.Value.ToString().Trim();
+                if (name.Value.ToString().Length > 0 && names.ContainsKey(name.Value.ToString()))
+                    names[name.Value.ToString()].Add(name);
+                else
+                    names.Add(name.Value.ToString(), new List<DataGridViewCell>(){name});
+            }
+
+            foreach(var kvp in names)
+            {
+                var color = EnableColor;
+                if (kvp.Value.Count > 1 || kvp.Key == "")
+                    color = ErrorColor;
+                foreach (DataGridViewCell cell in kvp.Value)
+                {
+                    cell.Style.BackColor = color;
+                    CheckRowValidation(cell.OwningRow);
+                    CheckAnimation(cell.OwningRow);
+                }
+            }
         }
 
         private void CheckAnimation(DataGridViewRow row)
         {
+            bool enable = row.Cells[(int)AnimationCell.Name].Style.BackColor != ErrorColor;
             DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)row.Cells[(int)AnimationCell.IsAnimated];
-            bool enable = cell.Value == cell.TrueValue;
+            bool enableAnim = cell.Value == cell.TrueValue;
             for (int i = 3; i < 6; i++)
             {
-                row.Cells[i].ReadOnly = !enable;
-                row.Cells[i].Style.BackColor = !enable ? Color.Gray : Color.White;
+                row.Cells[i].ReadOnly = enable == false ? true : !enableAnim;
+                row.Cells[i].Style.BackColor = enable == false ? DisableColor : enableAnim ? EnableColor : DisableColor;
             }
         }
 
