@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace PeachFox
 {
-    public partial class Project : Form
+    public partial class Project
     {
         private string _tileMapFilepath;
         private TileMap _tileMap;

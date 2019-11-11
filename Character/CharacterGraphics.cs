@@ -4,11 +4,10 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
 using LsonLib;
-using System.Linq;
 
 namespace PeachFox
 {
-    public partial class Project : Form
+    public partial class Project
     {
         private struct AnimationImage
         {
@@ -46,8 +45,8 @@ namespace PeachFox
 
         private void ExportTemplate(string path)
         {
-            string template = $"import \"{AnimationFnImport}\"\r\n" +
-                              $"import \"{ImageFnImport}\"\r\n" +
+            string template = $"require \"{AnimationFnImport}\"\r\n" +
+                              $"require \"{ImageFnImport}\"\r\n" +
                               $"local TABLE {GraphicsTableName}\r\n" +
                               $"return {GraphicsTableName}";
 

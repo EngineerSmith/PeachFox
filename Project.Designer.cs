@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ProjectTabs = new System.Windows.Forms.TabControl();
             this.tabSettings = new System.Windows.Forms.TabPage();
             this.tabTileMap = new System.Windows.Forms.TabPage();
@@ -80,6 +80,22 @@
             this.tabCharacter = new System.Windows.Forms.TabPage();
             this.tabCharacterControl = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBoxCharacterDefaultGraphic = new System.Windows.Forms.TextBox();
+            this.numericUpDownCharacterScale = new System.Windows.Forms.NumericUpDown();
+            this.textBoxCharacterGraphicFile = new System.Windows.Forms.TextBox();
+            this.textBoxCharacterName = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.textBoxCharacterSettingsFile = new System.Windows.Forms.TextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.labelCharacterSettingsHintText = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.characterGraphicBox = new System.Windows.Forms.PictureBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
@@ -120,6 +136,11 @@
             this.groupBox5.SuspendLayout();
             this.tabCharacter.SuspendLayout();
             this.tabCharacterControl.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCharacterScale)).BeginInit();
+            this.panel2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.characterGraphicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -609,6 +630,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.panel5);
+            this.tabPage2.Controls.Add(this.panel2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -616,6 +639,169 @@
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "Character Creator";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.groupBox6);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(3, 47);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(744, 452);
+            this.panel5.TabIndex = 17;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label11);
+            this.groupBox6.Controls.Add(this.label10);
+            this.groupBox6.Controls.Add(this.label9);
+            this.groupBox6.Controls.Add(this.label12);
+            this.groupBox6.Controls.Add(this.textBoxCharacterDefaultGraphic);
+            this.groupBox6.Controls.Add(this.numericUpDownCharacterScale);
+            this.groupBox6.Controls.Add(this.textBoxCharacterGraphicFile);
+            this.groupBox6.Controls.Add(this.textBoxCharacterName);
+            this.groupBox6.Location = new System.Drawing.Point(6, 6);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(225, 134);
+            this.groupBox6.TabIndex = 0;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Character";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(112, 102);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(81, 13);
+            this.label11.TabIndex = 7;
+            this.label11.Text = "Default Graphic";
+            this.label11.Click += new System.EventHandler(this.label11_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(112, 75);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(68, 13);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Graphics File";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(112, 47);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(34, 13);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Scale";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(112, 22);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(35, 13);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "Name";
+            // 
+            // textBoxCharacterDefaultGraphic
+            // 
+            this.textBoxCharacterDefaultGraphic.Location = new System.Drawing.Point(6, 99);
+            this.textBoxCharacterDefaultGraphic.Name = "textBoxCharacterDefaultGraphic";
+            this.textBoxCharacterDefaultGraphic.Size = new System.Drawing.Size(100, 20);
+            this.textBoxCharacterDefaultGraphic.TabIndex = 3;
+            // 
+            // numericUpDownCharacterScale
+            // 
+            this.numericUpDownCharacterScale.Location = new System.Drawing.Point(6, 45);
+            this.numericUpDownCharacterScale.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownCharacterScale.Name = "numericUpDownCharacterScale";
+            this.numericUpDownCharacterScale.Size = new System.Drawing.Size(100, 20);
+            this.numericUpDownCharacterScale.TabIndex = 2;
+            this.numericUpDownCharacterScale.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // textBoxCharacterGraphicFile
+            // 
+            this.textBoxCharacterGraphicFile.Location = new System.Drawing.Point(6, 72);
+            this.textBoxCharacterGraphicFile.Name = "textBoxCharacterGraphicFile";
+            this.textBoxCharacterGraphicFile.Size = new System.Drawing.Size(100, 20);
+            this.textBoxCharacterGraphicFile.TabIndex = 1;
+            // 
+            // textBoxCharacterName
+            // 
+            this.textBoxCharacterName.Location = new System.Drawing.Point(6, 19);
+            this.textBoxCharacterName.Name = "textBoxCharacterName";
+            this.textBoxCharacterName.Size = new System.Drawing.Size(100, 20);
+            this.textBoxCharacterName.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.textBoxCharacterSettingsFile);
+            this.panel2.Controls.Add(this.button6);
+            this.panel2.Controls.Add(this.button8);
+            this.panel2.Controls.Add(this.button7);
+            this.panel2.Controls.Add(this.labelCharacterSettingsHintText);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(744, 44);
+            this.panel2.TabIndex = 16;
+            // 
+            // textBoxCharacterSettingsFile
+            // 
+            this.textBoxCharacterSettingsFile.Enabled = false;
+            this.textBoxCharacterSettingsFile.Location = new System.Drawing.Point(3, 3);
+            this.textBoxCharacterSettingsFile.Name = "textBoxCharacterSettingsFile";
+            this.textBoxCharacterSettingsFile.Size = new System.Drawing.Size(184, 20);
+            this.textBoxCharacterSettingsFile.TabIndex = 11;
+            // 
+            // button6
+            // 
+            this.button6.Enabled = false;
+            this.button6.Location = new System.Drawing.Point(327, 3);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 20);
+            this.button6.TabIndex = 15;
+            this.button6.Text = "Save As...";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            this.button8.Enabled = false;
+            this.button8.Location = new System.Drawing.Point(193, 3);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(25, 20);
+            this.button8.TabIndex = 12;
+            this.button8.Text = "...";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Enabled = false;
+            this.button7.Location = new System.Drawing.Point(224, 3);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(97, 20);
+            this.button7.TabIndex = 14;
+            this.button7.Text = "New Character";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // labelCharacterSettingsHintText
+            // 
+            this.labelCharacterSettingsHintText.AutoSize = true;
+            this.labelCharacterSettingsHintText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.labelCharacterSettingsHintText.ForeColor = System.Drawing.Color.Maroon;
+            this.labelCharacterSettingsHintText.Location = new System.Drawing.Point(3, 26);
+            this.labelCharacterSettingsHintText.Name = "labelCharacterSettingsHintText";
+            this.labelCharacterSettingsHintText.Size = new System.Drawing.Size(73, 13);
+            this.labelCharacterSettingsHintText.TabIndex = 13;
+            this.labelCharacterSettingsHintText.Text = "HINT TEXT";
             // 
             // tabPage3
             // 
@@ -669,16 +855,16 @@
             // 
             // NameCell
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(129)))), ((int)(((byte)(122)))));
-            this.NameCell.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(129)))), ((int)(((byte)(122)))));
+            this.NameCell.DefaultCellStyle = dataGridViewCellStyle13;
             this.NameCell.HeaderText = "Name";
             this.NameCell.Name = "NameCell";
             this.NameCell.ToolTipText = "Name of graphic state";
             // 
             // FileCell
             // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Gray;
-            this.FileCell.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.Gray;
+            this.FileCell.DefaultCellStyle = dataGridViewCellStyle14;
             this.FileCell.HeaderText = "File";
             this.FileCell.Name = "FileCell";
             this.FileCell.ReadOnly = true;
@@ -686,10 +872,10 @@
             // 
             // AnimatedCell
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle3.NullValue = false;
-            this.AnimatedCell.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle15.NullValue = false;
+            this.AnimatedCell.DefaultCellStyle = dataGridViewCellStyle15;
             this.AnimatedCell.FalseValue = "false";
             this.AnimatedCell.HeaderText = "Is Animated";
             this.AnimatedCell.Name = "AnimatedCell";
@@ -699,8 +885,8 @@
             // 
             // WidthCell
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Gray;
-            this.WidthCell.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.Gray;
+            this.WidthCell.DefaultCellStyle = dataGridViewCellStyle16;
             this.WidthCell.HeaderText = "Width";
             this.WidthCell.Name = "WidthCell";
             this.WidthCell.ReadOnly = true;
@@ -708,8 +894,8 @@
             // 
             // HeightCell
             // 
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Gray;
-            this.HeightCell.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.Gray;
+            this.HeightCell.DefaultCellStyle = dataGridViewCellStyle17;
             this.HeightCell.HeaderText = "Height";
             this.HeightCell.Name = "HeightCell";
             this.HeightCell.ReadOnly = true;
@@ -717,8 +903,8 @@
             // 
             // TimeCell
             // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Gray;
-            this.TimeCell.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.Gray;
+            this.TimeCell.DefaultCellStyle = dataGridViewCellStyle18;
             this.TimeCell.HeaderText = "Time";
             this.TimeCell.Name = "TimeCell";
             this.TimeCell.ReadOnly = true;
@@ -848,6 +1034,13 @@
             this.groupBox5.PerformLayout();
             this.tabCharacter.ResumeLayout(false);
             this.tabCharacterControl.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCharacterScale)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.characterGraphicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
@@ -923,5 +1116,21 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn WidthCell;
         private System.Windows.Forms.DataGridViewTextBoxColumn HeightCell;
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeCell;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label labelCharacterSettingsHintText;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBoxCharacterDefaultGraphic;
+        private System.Windows.Forms.NumericUpDown numericUpDownCharacterScale;
+        private System.Windows.Forms.TextBox textBoxCharacterGraphicFile;
+        private System.Windows.Forms.TextBox textBoxCharacterName;
+        private System.Windows.Forms.TextBox textBoxCharacterSettingsFile;
     }
 }

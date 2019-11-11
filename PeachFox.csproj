@@ -52,6 +52,9 @@
     <Compile Include="Character\CharacterGraphics.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Character\CharacterSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="OpenProject.cs">
       <SubType>Form</SubType>
     </Compile>
