@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text.RegularExpressions;
 using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
@@ -425,10 +425,14 @@ namespace PeachFox
 
         private TileButtonData GetData(Button button)
         {
-            for (int i = 0; i < Squares.Count; i++)
-                for (int j = 0; j < Squares[i].Count; j++)
-                    if (Squares[i][j].Item1.Name == button.Name)
-                        return Squares[i][j].Item2;
+            //i + "." + j
+            var reg = Regex.Match(button.Name, @"(\d+).(\d+)");
+            if (reg.Success == false)
+                return null;
+            int i = Int32.Parse(reg.Groups[1].Value);
+            int j = Int32.Parse(reg.Groups[2].Value);
+            if (Squares[i][j].Item1.Name == button.Name)
+                return Squares[i][j].Item2;
             return null;
         }
 

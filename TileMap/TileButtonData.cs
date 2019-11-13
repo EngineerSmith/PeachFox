@@ -28,8 +28,8 @@ namespace PeachFox
 
         public void Clean()
         {
-            Background = new Images();
-            Foreground = new Images();
+            Background.Clear();
+            Foreground.Clear();
         }
     }
 }
