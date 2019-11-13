@@ -142,7 +142,8 @@ namespace PeachFox
                 Squares.Add(new List<Tuple<Button, TileButtonData>>(height));
                 for (int h = 0; h < height; h++)
                 {
-                    Squares[w].Add(new Tuple<Button, TileButtonData>(new Button {
+                    Squares[w].Add(new Tuple<Button, TileButtonData>(new Button
+                    {
                         Location = new Point(3 + squareSize * w, 3 + squareSize * h),
                         Name = w + "." + h,
                         Size = new Size(squareSize, squareSize),
@@ -415,7 +416,7 @@ namespace PeachFox
             saveFileDialog1.InitialDirectory = ProjectPath + "\\assets";
             saveFileDialog1.Filter = "(*.lua)|*.lua|All files (*.*)|*.*";
             var result = saveFileDialog1.ShowDialog();
-            if (result != DialogResult.OK && result != DialogResult.Yes) 
+            if (result != DialogResult.OK && result != DialogResult.Yes)
                 return;
 
             File.WriteAllText(saveFileDialog1.FileName, _tileMap.String());
@@ -449,21 +450,21 @@ namespace PeachFox
             PaintTiles();
         }
 
-        private Pen TilePen_Red = new Pen(Color.Red) { Width = 2};
+        private Pen TilePen_Red = new Pen(Color.Red) { Width = 2 };
         private Pen TilePen_LightGrey = new Pen(Color.FromArgb(150, Color.LightGray));
 
         private void TileButtonPaint(object sender, PaintEventArgs e)
         {
             Button button = (Button)sender;
             TileButtonData data = GetData(button);
-            if (data == null) 
+            if (data == null)
                 return;
 
             Graphics g = e.Graphics;
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighSpeed;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
-            
+
             CheckState state = checkBoxDraw.CheckState;
             if (state == CheckState.Unchecked || state == CheckState.Indeterminate)
             {
@@ -498,9 +499,10 @@ namespace PeachFox
             var g = _tileMap.GraphicsData;
             colorDialog.Color = g.RGB;
             var result = colorDialog.ShowDialog();
-            if(result == DialogResult.OK || result == DialogResult.Yes)
+            if (result == DialogResult.OK || result == DialogResult.Yes)
                 g.RGB = colorDialog.Color;
             Color tileMapColor = g.RGB;
             buttonBackgroundtileMapColor.BackColor = tileMapColor;
+        }
     }
 }
