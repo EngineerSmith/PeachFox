@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using LsonLib;
 using System.IO;
 
@@ -98,6 +96,32 @@ namespace PeachFox
             get => _root["Scale"].GetInt();
             set => _root["Scale"] = value;
         }
+        public int R
+        {
+            get => _root["R"].GetInt();
+            set => _root["R"] = value;
+        }
+        public int G
+        {
+            get => _root["G"].GetInt();
+            set => _root["G"] = value;
+        }
+        public int B
+        {
+            get => _root["B"].GetInt();
+            set => _root["B"] = value;
+        }
+
+        public Color RGB
+        {
+            get => Color.FromArgb(R, G, B);
+            set
+            {
+                R = value.R;
+                G = value.G;
+                B = value.B;
+            }
+        }
 
         private LsonDict _root;
         public static explicit operator LsonDict(GraphicsData value)
@@ -114,13 +138,19 @@ namespace PeachFox
             Width = 0;
             Height = 0;
             Scale = 1;
+            R = 255;
+            G = 255;
+            B = 255;
         }
-        public GraphicsData(int width, int height, int scale)
+        public GraphicsData(int width, int height, int scale, int r, int g, int b)
         {
             _root = new LsonDict();
             Width = width;
             Height = height;
             Scale = scale;
+            R = r;
+            G = g;
+            B = b;
         }
         public GraphicsData(LsonDict root)
         {
@@ -128,6 +158,9 @@ namespace PeachFox
             _root.AddIfNotExist("Width", new LsonNumber(0));
             _root.AddIfNotExist("Height", new LsonNumber(0));
             _root.AddIfNotExist("Scale", new LsonNumber(1));
+            _root.AddIfNotExist("R", new LsonNumber(255));
+            _root.AddIfNotExist("G", new LsonNumber(255));
+            _root.AddIfNotExist("B", new LsonNumber(255));
         }
     }
     public class Animation

@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ProjectTabs = new System.Windows.Forms.TabControl();
             this.tabSettings = new System.Windows.Forms.TabPage();
             this.tabTileMap = new System.Windows.Forms.TabPage();
@@ -43,6 +43,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonBackgroundtileMapColor = new System.Windows.Forms.Button();
             this.numericUpDownScale = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -115,6 +116,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.label7 = new System.Windows.Forms.Label();
             this.ProjectTabs.SuspendLayout();
             this.tabTileMap.SuspendLayout();
             this.tabControllerTileMap.SuspendLayout();
@@ -236,15 +238,26 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.buttonBackgroundtileMapColor);
             this.groupBox1.Controls.Add(this.numericUpDownScale);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.panel4);
             this.groupBox1.Location = new System.Drawing.Point(9, 58);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(157, 115);
+            this.groupBox1.Size = new System.Drawing.Size(157, 160);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Graphic Settings";
+            // 
+            // buttonBackgroundtileMapColor
+            // 
+            this.buttonBackgroundtileMapColor.Location = new System.Drawing.Point(11, 127);
+            this.buttonBackgroundtileMapColor.Name = "buttonBackgroundtileMapColor";
+            this.buttonBackgroundtileMapColor.Size = new System.Drawing.Size(124, 23);
+            this.buttonBackgroundtileMapColor.TabIndex = 8;
+            this.buttonBackgroundtileMapColor.UseVisualStyleBackColor = true;
+            this.buttonBackgroundtileMapColor.Click += new System.EventHandler(this.buttonBackgroundtileMapColor_Click);
             // 
             // numericUpDownScale
             // 
@@ -674,7 +687,6 @@
             this.label11.Size = new System.Drawing.Size(81, 13);
             this.label11.TabIndex = 7;
             this.label11.Text = "Default Graphic";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // label10
             // 
@@ -855,16 +867,16 @@
             // 
             // NameCell
             // 
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(129)))), ((int)(((byte)(122)))));
-            this.NameCell.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(129)))), ((int)(((byte)(122)))));
+            this.NameCell.DefaultCellStyle = dataGridViewCellStyle7;
             this.NameCell.HeaderText = "Name";
             this.NameCell.Name = "NameCell";
             this.NameCell.ToolTipText = "Name of graphic state";
             // 
             // FileCell
             // 
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.Gray;
-            this.FileCell.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.Gray;
+            this.FileCell.DefaultCellStyle = dataGridViewCellStyle8;
             this.FileCell.HeaderText = "File";
             this.FileCell.Name = "FileCell";
             this.FileCell.ReadOnly = true;
@@ -872,10 +884,10 @@
             // 
             // AnimatedCell
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle15.NullValue = false;
-            this.AnimatedCell.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle9.NullValue = false;
+            this.AnimatedCell.DefaultCellStyle = dataGridViewCellStyle9;
             this.AnimatedCell.FalseValue = "false";
             this.AnimatedCell.HeaderText = "Is Animated";
             this.AnimatedCell.Name = "AnimatedCell";
@@ -885,8 +897,8 @@
             // 
             // WidthCell
             // 
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.Gray;
-            this.WidthCell.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Gray;
+            this.WidthCell.DefaultCellStyle = dataGridViewCellStyle10;
             this.WidthCell.HeaderText = "Width";
             this.WidthCell.Name = "WidthCell";
             this.WidthCell.ReadOnly = true;
@@ -894,8 +906,8 @@
             // 
             // HeightCell
             // 
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.Gray;
-            this.HeightCell.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.Gray;
+            this.HeightCell.DefaultCellStyle = dataGridViewCellStyle11;
             this.HeightCell.HeaderText = "Height";
             this.HeightCell.Name = "HeightCell";
             this.HeightCell.ReadOnly = true;
@@ -903,8 +915,8 @@
             // 
             // TimeCell
             // 
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.Gray;
-            this.TimeCell.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.Gray;
+            this.TimeCell.DefaultCellStyle = dataGridViewCellStyle12;
             this.TimeCell.HeaderText = "Time";
             this.TimeCell.Name = "TimeCell";
             this.TimeCell.ReadOnly = true;
@@ -987,6 +999,15 @@
             // 
             this.openFileDialog1.FileName = "TileMap.lua";
             this.openFileDialog1.Title = "Open TileMap";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(29, 108);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(92, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Background Color";
             // 
             // Project
             // 
@@ -1132,5 +1153,7 @@
         private System.Windows.Forms.TextBox textBoxCharacterGraphicFile;
         private System.Windows.Forms.TextBox textBoxCharacterName;
         private System.Windows.Forms.TextBox textBoxCharacterSettingsFile;
+        private System.Windows.Forms.Button buttonBackgroundtileMapColor;
+        private System.Windows.Forms.Label label7;
     }
 }

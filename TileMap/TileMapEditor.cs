@@ -312,13 +312,16 @@ namespace PeachFox
             numericUpDownWidth.Value = data.Width;
             numericUpDownHeight.Value = data.Height;
             numericUpDownScale.Value = data.Scale;
+            buttonBackgroundtileMapColor.BackColor = data.RGB;
         }
         private void SaveGraphicsData(object sender, EventArgs e)
         {
+            Color RGB = buttonBackgroundtileMapColor.BackColor;
             _tileMap.GraphicsData = new GraphicsData(
                 (int)numericUpDownWidth.Value,
                 (int)numericUpDownHeight.Value,
-                (int)numericUpDownScale.Value
+                (int)numericUpDownScale.Value,
+                RGB.R, RGB.G, RGB.B
             );
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -489,5 +492,15 @@ namespace PeachFox
             TilePen_Red.Dispose();
             TilePen_LightGrey.Dispose();
         }
+
+        private void buttonBackgroundtileMapColor_Click(object sender, EventArgs e)
+        {
+            var g = _tileMap.GraphicsData;
+            colorDialog.Color = g.RGB;
+            var result = colorDialog.ShowDialog();
+            if(result == DialogResult.OK || result == DialogResult.Yes)
+                g.RGB = colorDialog.Color;
+            Color tileMapColor = g.RGB;
+            buttonBackgroundtileMapColor.BackColor = tileMapColor;
     }
 }
