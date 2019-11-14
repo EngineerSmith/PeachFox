@@ -36,6 +36,7 @@
             this.zoomBox = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
             this.cellsizeGroupBox = new System.Windows.Forms.GroupBox();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.radioButton0 = new System.Windows.Forms.RadioButton();
             this.radioButton32 = new System.Windows.Forms.RadioButton();
             this.radioButton20 = new System.Windows.Forms.RadioButton();
@@ -60,11 +61,13 @@
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomBox)).BeginInit();
             this.cellsizeGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.quadH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quadW)).BeginInit();
@@ -77,7 +80,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -143,7 +146,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(43, 12);
+            this.button1.Location = new System.Drawing.Point(6, 14);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(47, 20);
             this.button1.TabIndex = 6;
@@ -158,12 +161,30 @@
             this.cellsizeGroupBox.Controls.Add(this.radioButton32);
             this.cellsizeGroupBox.Controls.Add(this.radioButton20);
             this.cellsizeGroupBox.Controls.Add(this.radioButton16);
-            this.cellsizeGroupBox.Location = new System.Drawing.Point(515, 3);
+            this.cellsizeGroupBox.Location = new System.Drawing.Point(492, 3);
             this.cellsizeGroupBox.Name = "cellsizeGroupBox";
             this.cellsizeGroupBox.Size = new System.Drawing.Size(83, 64);
             this.cellsizeGroupBox.TabIndex = 7;
             this.cellsizeGroupBox.TabStop = false;
             this.cellsizeGroupBox.Text = "CellSize";
+            // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.Location = new System.Drawing.Point(19, 41);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            254,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(38, 20);
+            this.numericUpDown4.TabIndex = 8;
+            this.numericUpDown4.Value = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.numericUpDown4.ValueChanged += new System.EventHandler(this.numericUpDown4_ValueChanged);
             // 
             // radioButton0
             // 
@@ -221,7 +242,7 @@
             this.groupBox2.Controls.Add(this.quadW);
             this.groupBox2.Controls.Add(this.quadY);
             this.groupBox2.Controls.Add(this.quadX);
-            this.groupBox2.Location = new System.Drawing.Point(299, 3);
+            this.groupBox2.Location = new System.Drawing.Point(278, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(210, 64);
             this.groupBox2.TabIndex = 8;
@@ -255,7 +276,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(115, 45);
+            this.label2.Location = new System.Drawing.Point(116, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 5;
@@ -339,7 +360,7 @@
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Location = new System.Drawing.Point(197, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(96, 64);
+            this.groupBox3.Size = new System.Drawing.Size(78, 64);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Camera";
@@ -347,7 +368,7 @@
             // Zoom
             // 
             this.Zoom.AutoSize = true;
-            this.Zoom.Location = new System.Drawing.Point(50, 43);
+            this.Zoom.Location = new System.Drawing.Point(44, 43);
             this.Zoom.Name = "Zoom";
             this.Zoom.Size = new System.Drawing.Size(34, 13);
             this.Zoom.TabIndex = 7;
@@ -368,6 +389,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.numericUpDown5);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.numericUpDown1);
             this.groupBox4.Controls.Add(this.numericUpDown3);
@@ -375,20 +398,20 @@
             this.groupBox4.Controls.Add(this.numericUpDown2);
             this.groupBox4.Controls.Add(this.checkBox1);
             this.groupBox4.Enabled = false;
-            this.groupBox4.Location = new System.Drawing.Point(604, 3);
+            this.groupBox4.Location = new System.Drawing.Point(579, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(151, 64);
+            this.groupBox4.Size = new System.Drawing.Size(184, 64);
             this.groupBox4.TabIndex = 10;
             this.groupBox4.TabStop = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(55, 21);
+            this.label4.Location = new System.Drawing.Point(50, 21);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 13);
+            this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Number of Frames";
+            this.label4.Text = "Num";
             // 
             // numericUpDown1
             // 
@@ -429,7 +452,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(99, 44);
+            this.label3.Location = new System.Drawing.Point(95, 44);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 7;
@@ -451,7 +474,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(4, 1);
+            this.checkBox1.Location = new System.Drawing.Point(0, 0);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(70, 17);
             this.checkBox1.TabIndex = 0;
@@ -468,23 +491,43 @@
             this.panel2.Size = new System.Drawing.Size(766, 344);
             this.panel2.TabIndex = 11;
             // 
-            // numericUpDown4
+            // label5
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(19, 41);
-            this.numericUpDown4.Maximum = new decimal(new int[] {
-            254,
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(150, 21);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(24, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Dur";
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.DecimalPlaces = 3;
+            this.numericUpDown5.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numericUpDown5.Location = new System.Drawing.Point(85, 18);
+            this.numericUpDown5.Maximum = new decimal(new int[] {
+            1024,
             0,
             0,
             0});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(38, 20);
-            this.numericUpDown4.TabIndex = 8;
-            this.numericUpDown4.Value = new decimal(new int[] {
-            16,
+            this.numericUpDown5.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
-            this.numericUpDown4.ValueChanged += new System.EventHandler(this.numericUpDown4_ValueChanged);
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(59, 20);
+            this.numericUpDown5.TabIndex = 11;
+            this.numericUpDown5.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown5.ValueChanged += new System.EventHandler(this.Animation_Update);
             // 
             // TileEditor
             // 
@@ -506,6 +549,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.zoomBox)).EndInit();
             this.cellsizeGroupBox.ResumeLayout(false);
             this.cellsizeGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.quadH)).EndInit();
@@ -521,7 +565,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -561,5 +605,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown numericUpDown5;
     }
 }

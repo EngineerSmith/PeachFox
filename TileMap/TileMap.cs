@@ -181,6 +181,12 @@ namespace PeachFox
             set => _root["Num"] = value;
         }
 
+        public float Dur
+        {
+            get => (float)_root["Dur"].GetDouble();
+            set => _root["Dur"] = value;
+        }
+
         private LsonDict _root;
         public static explicit operator LsonDict(Animation value)
         {
@@ -196,13 +202,15 @@ namespace PeachFox
             X = 0;
             Y = 0;
             Num = 0;
+            Dur = 0;
         }
-        public Animation(int x, int y, int num)
+        public Animation(int x, int y, int num, float dur)
         {
             _root = new LsonDict();
             X = x;
             Y = y;
             Num = num;
+            Dur = dur;
         }
         public Animation(LsonDict root)
         {
@@ -210,6 +218,7 @@ namespace PeachFox
             _root.AddIfNotExist("X", new LsonNumber(0));
             _root.AddIfNotExist("Y", new LsonNumber(0));
             _root.AddIfNotExist("Num", new LsonNumber(0));
+            _root.AddIfNotExist("Dur", new LsonNumber(1.0));
         }
     }
     public class Quad

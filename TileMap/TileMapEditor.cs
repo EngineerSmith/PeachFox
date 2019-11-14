@@ -230,7 +230,7 @@ namespace PeachFox
             tileGraphic.Quad.Width = _tileData.quad.W;
             tileGraphic.Quad.Height = _tileData.quad.H;
             if (_tileData.anim != null)
-                tileGraphic.Animation = new Animation(_tileData.anim.X, _tileData.anim.Y, _tileData.anim.Num);
+                tileGraphic.Animation = new Animation(_tileData.anim.X, _tileData.anim.Y, _tileData.anim.Num, _tileData.anim.Dur);
 
             if (checkBoxGround.Checked)
             {

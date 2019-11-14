@@ -21,6 +21,7 @@ namespace PeachFox
         public class Anim
         {
             public int X, Y, Num;
+            public float Dur;
         }
     }
 

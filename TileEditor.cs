@@ -27,6 +27,7 @@ namespace PeachFox
         Image bmp;
         private int XQuad, YQuad, WQuad, HQuad;
         private int AnimNum, AnimX, AnimY;
+        private float AnimDur;
 
         private int cellSize = 16;
         private int numOfCellsX = 200;
@@ -253,6 +254,7 @@ namespace PeachFox
             AnimNum = (int)numericUpDown3.Value;
             AnimX = (int)numericUpDown2.Value;
             AnimY = (int)numericUpDown1.Value;
+            AnimDur = (float)numericUpDown4.Value;
             ReDraw();
         }
 
@@ -317,6 +319,7 @@ namespace PeachFox
                 tile.anim.X = AnimX;
                 tile.anim.Y = AnimY;
                 tile.anim.Num = AnimNum;
+                tile.anim.Dur = AnimDur;
             }
 
             Program.GetProjectForm().TileData = tile;
